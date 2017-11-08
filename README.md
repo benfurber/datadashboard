@@ -6,9 +6,10 @@ Following: http://learnjsdata.com/getting_started.html
 
 ## Early set-up and notes
 
-### 1. Set-up simple node server (https://github.com/indexzero/http-server)
+### 1. Set-up d3 and simple node server (https://github.com/indexzero/http-server)
 ```
 >>> npm install -g http-server
+>>> npm install -g d3
 ```
 ```
 >>> cd /path/to/dir
@@ -46,8 +47,8 @@ d3.csv("/data/cities.csv", function(d) {
 ### 5. Stuff about loading multiple data sources:
 Loading Multiple Files section - http://learnjsdata.com/read_data.html
 
-### 6. Combining multiple data sources: 
+### 6. Combining multiple data sources:
 http://learnjsdata.com/combine_data.html
 
-### 7. Grouping data: 
+### 7. Grouping data:
 http://learnjsdata.com/group_data.html
