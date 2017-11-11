@@ -35,6 +35,8 @@ d3.csv("/sample-data/sales.csv", function(error, data) {
     console.log(data[0])
   });
 
+  var byType = d3.net()
+
   // Scale the range of the data in the domains
   x.domain(data.map(function(d) { return d.salesperson; }));
   y.domain([0, d3.max(data, function(d) { return d.sales; })]);
