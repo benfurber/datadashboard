@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+  <title>Sample</title>
+  <style>
+    .bar { fill: steelblue; }
+    .axis path { /* display: none; */ }
+  </style>
+</head>
+<body>
+  <div id="totals">
+    <h2 id="totalShifts">Total shifts: </h2>
+    <h2 id="totalCollectors">Total collectors: </h2>
+    <h2 id="theDate">Date: </h2>
+  </div>
+
+  <div id="stackedbars">
+    <h3>Cold/Warm/Loyal</h1>
+    <svg id="stacked" width="600" height="600"></svg>
+  </div>
+
+</body>
+<script src="//d3js.org/d3.v4.min.js"></script>
+<script src="js/totals.js"></script>
+<script src="js/canvas1.js"></script>
+</html>
