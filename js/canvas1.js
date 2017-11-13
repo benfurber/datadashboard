@@ -4,17 +4,6 @@ var svg = d3.select("#stacked"),
     height = +svg.attr("height") - margin.top - margin.bottom,
     g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    // var margin = {top: 20, right: 150, bottom: 50, left: 40},
-    //     width = 600 - margin.left - marginStacked.right,
-    //     height = 500 - margin.top - marginStacked.bottom;
-    //
-    //
-    // var svg = d3.select("#stacked").append("svg")
-    //     .attr("width", widthStacked + marginStacked.left + marginStacked.right)
-    //     .attr("height", heightStacked + marginStacked.top + marginStacked.bottom)
-    //   .append("g")
-    //     .attr("transform", "translate(" + marginStacked.left + "," + marginStacked.top + ")");
-
 var x = d3.scaleBand()
     .rangeRound([0, width])
     .padding(0.3)
@@ -83,6 +72,11 @@ d3.csv("./data/canvas1-v2.csv", type, function(error, data) {
       .attr("dy", ".35em")
       .attr("text-anchor", "start")
       .text(function(d) { return d; });
+
+  var theTitles = div.selectAll("#titles")
+    .data(data)
+    .enter.append("#totalShifts")
+      .text(function(d) { return d3.sum(d.data.supporterType); } );
 });
 
 function type(d, i, columns) {
