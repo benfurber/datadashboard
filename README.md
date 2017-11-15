@@ -1,11 +1,6 @@
 # datadashboard
 A Javascript based data visualisation programme. The main library being used is D3.
 
-Guides:
-http://learnjsdata.com/getting_started.html
-https://www.youtube.com/playlist?list=PL6il2r9i3BqH9PmbOf5wA5E1wOG3FT22p
-
-
 ## Early set-up and notes
 
 ### 1. Set-up d3 and simple node server (https://github.com/indexzero/http-server)

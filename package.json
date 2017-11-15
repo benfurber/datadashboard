@@ -1,0 +1,32 @@
+{
+  "name": "datadashboard",
+  "version": "0.1.0",
+  "description": "Playing with the js library d3, mainly.",
+  "author": "Ben Furber <ben@furber-consultancy.com>",
+  "bin": {
+    "module-name": "./bin/module-name"
+  },
+  "scripts": {
+    "test": "",
+    "start": "node data/analyze.js",
+    "prepublish": ""
+  },
+  "main": "/usr/local/bin/node",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benfurber/datadashboard"
+  },
+  "bugs": {
+    "url": "https://github.com/benfurber/datadashboard/issues"
+  },
+  "dependencies": {
+    "d3": "*",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {},
+  "private": true,
+  "publishConfig": {
+    "registry": ""
+  },
+  "license": "None"
+}
