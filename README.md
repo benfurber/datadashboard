@@ -5,9 +5,10 @@ A Javascript based data visualisation programme. The main library being used is 
 
 ### 1. Set-up d3 and simple node server (https://github.com/indexzero/http-server)
 ```
->>> npm install -g d3
->>> npm install -g d3-collection
->>> npm install -g http-server
+>>> npm install d3
+>>> npm install d3-collection
+>>> npm install http-server
+>>> npm install d3-dsv
 ```
 ```
 >>> cd /path/to/dir
