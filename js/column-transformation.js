@@ -8,23 +8,9 @@ const fs        = require('fs-extra-promise');
 const infname   = '../data/canvas1.csv';
 const outfname  = '../data/canvas1-processed.csv';
 
-const inputFields = [
-  'regID',
-  'channel',
-  'supporterType'
-];
-
-const extractFields = [
-  'regID',
-  'channel',
-  'supporterType'
-];
-
-const outputFields = [
-  'regID',
-  'theChannel',
-  'supporterType'
-]
+const inputFields = ['regID','channel','supporterType'];
+const extractFields = ['regID','supporterType','channel'];
+const outputFields = ['regID','supporterType','theChannel']
 
 fs.createReadStream(infname)
 .pipe(parse({
