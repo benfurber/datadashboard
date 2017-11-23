@@ -1,41 +1,68 @@
+var fs = require("fs");
+
 //require the csvtojson converter class
 var Converter = require("csvtojson").Converter;
+
 // create a new converter object
 var converter = new Converter({});
 
 // call the fromFile function which takes in the path to your
 // csv file as well as a callback function
 converter.fromFile("../data/canvas1-processed.csv",function(err,result){
+
     // if an error has occured then handle it
     if(err){
-        console.log("An error Has occured");
+        console.log("An error has occured in the processing of the CSV.");
         console.log(err);
     }
 
-    console.log(result)
+    // DEBUG OPTION - log the CSV to verify it has worked
+    // console.log(result)
 
     // The supporter types and channels
     var supporterTypes = ["cold", "warm", "loyal"];
-    var channelTypes = ["email", "ppc", "search", "social"];
+    var channelTypes = ["email", "ppc", "search", "social", "offline"];
 
-    // Building the JSON structure
+    // Building the JSON structures
+    // Have to build the nested channels object first
     var channelsObject = {};
     for (var i = 0, len = channelTypes.length; i < len; i++) {
       channelsObject[channelTypes[i]] = 0;
     };
 
+    // Can then built the parent object with the SAME child object
     var forExport = {};
     for (var i = 0, len = supporterTypes.length; i < len; i++) {
       forExport[supporterTypes[i]] = channelsObject;
     };
 
+    // My innefficient way to make the child objects different
+    forExport = JSON.stringify(forExport);
+    forExport = JSON.parse(forExport);
+
+    // The main bit - Populating of the JSON
     for (var i = 0, len = result.length; i < len; i++) {
-      if (result[i]["supporterType"] == "Cold" && result[i]["theChannel"] == "Email") {
-        forExport["cold"]["email"] += 1;
-      }
+      var sType = result[i]["supporterType"].toLowerCase();
+      var tChannel = result[i]["theChannel"].toLowerCase();
+      forExport[sType][tChannel] += 1;
     };
 
-    // log our json to verify it has worked
-    console.log(forExport);
+    // DEBUG OPTION - log the object to verify it has worked
+    // console.log(forExport);
 
+    // Convert to JSON
+    forExport = JSON.stringify(forExport, null, '\t');
+
+    // Write the JSON to a file
+    fs.writeFile("../data/canvas1-new.json", forExport, (err) => {
+
+      // throws an error, you could also catch it here
+      if(err){
+          console.log("An error has occured in the writing of the JSON file.");
+          console.log(err);
+      }
+      // success case, the file was saved
+      console.log("File written.");
+      
+    });
 });
