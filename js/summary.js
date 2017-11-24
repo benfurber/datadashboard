@@ -40,29 +40,59 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
     forExport = JSON.stringify(forExport);
     forExport = JSON.parse(forExport);
 
+    // Copy of the above object for collectors
+    var forExportCollectors = forExport;
+    forExportCollectors = JSON.stringify(forExportCollectors);
+    forExportCollectors = JSON.parse(forExportCollectors);
+
     // The main bit - Populating of the JSON
+    // Collections JSON populating
     for (var i = 0, len = result.length; i < len; i++) {
       var sType = result[i]["supporterType"].toLowerCase();
       var tChannel = result[i]["theChannel"].toLowerCase();
       forExport[sType][tChannel] += 1;
     };
 
+    // Collectors JSON populating
+    var uniqueIDs = [];
+    for (var i = 0, len = result.length; i < len; i++) {
+      var tempID = result[i]["regID"];
+      if (tempID != uniqueIDs[tempID]) {
+        var sType = result[i]["supporterType"].toLowerCase();
+        var tChannel = result[i]["theChannel"].toLowerCase();
+        forExportCollectors[sType][tChannel] += 1;
+        uniqueIDs.push(tempID);
+      }
+    };
+
     // DEBUG OPTION - log the object to verify it has worked
-    // console.log(forExport);
+    // console.log(forExportCollectors);
 
-    // Convert to JSON
+    // Convert EACH ONE to JSON
     forExport = JSON.stringify(forExport, null, '\t');
+    forExportCollectors = JSON.stringify(forExportCollectors, null, '\t');
 
-    // Write the JSON to a file
-    fs.writeFile("../data/canvas1-new.json", forExport, (err) => {
+    // Write the collections JSON to a file
+    fs.writeFile("../data/processed/byChannel-Collections.json", forExport, (err) => {
 
       // throws an error, you could also catch it here
-      if(err){
-          console.log("An error has occured in the writing of the JSON file.");
+      if(err) {
+          console.log("An error has occured while writing of the collections JSON file.");
           console.log(err);
-      }
+      };
+
       // success case, the file was saved
-      console.log("File written.");
-      
+      console.log("Collctions file written.");
+
     });
+
+    // Write the collectors JSON to a file
+    fs.writeFile("../data/processed/byChannel-Collectors.json", forExportCollectors, (err) => {
+      if(err) {
+          console.log("An error has occured while writing the collectors JSON file.");
+          console.log(err);
+      };
+      console.log("Collectors file written.");
+    });
+
 });

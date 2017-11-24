@@ -1,8 +1,8 @@
 {
 	"cold": {
-		"email": 1,
+		"email": 4,
 		"ppc": 4,
-		"search": 3,
+		"search": 4,
 		"social": 0,
 		"offline": 0
 	},
@@ -16,7 +16,7 @@
 	"loyal": {
 		"email": 0,
 		"ppc": 0,
-		"search": 5,
+		"search": 7,
 		"social": 2,
 		"offline": 1
 	}

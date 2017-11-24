@@ -3,10 +3,12 @@ regID,supporterType,theChannel,newColumn
 2,Loyal,Social
 3,Cold,PPC
 4,Cold,Search
+4,Cold,Search
 5,Warm,Search
 6,Warm,Email
 7,Warm,Search
 8,Cold,PPC
+9,Loyal,Search
 9,Loyal,Search
 10,Warm,Search
 11,Loyal,Search
@@ -14,10 +16,14 @@ regID,supporterType,theChannel,newColumn
 13,Cold,PPC
 14,Cold,Search
 15,Cold,Email
+15,Cold,Email
+15,Cold,Email
+15,Cold,Email
 16,Warm,Email
 17,Warm,Search
 18,Cold,PPC
 19,Loyal,Search
+20,Loyal,Search
 20,Loyal,Search
 21,Loyal,Offline
 22,Cold,Search
