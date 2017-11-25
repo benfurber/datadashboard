@@ -11,6 +11,10 @@ npm install d3-dsv
 npm install http-server
 npm install csv
 ```
+Considering scraping d3, it's so complected and chartsjs looks a lot simpler:
+```
+npm install chart.js --save
+```
 ```
 cd /path/to/dir
 http-server
