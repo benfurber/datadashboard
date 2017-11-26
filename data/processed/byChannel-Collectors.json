@@ -19,5 +19,17 @@
 		"search": 5,
 		"social": 2,
 		"offline": 1
-	}
+	},
+	"supporterLabels": [
+		"cold",
+		"warm",
+		"loyal"
+	],
+	"channelLabels": [
+		"email",
+		"ppc",
+		"search",
+		"social",
+		"offline"
+	]
 }

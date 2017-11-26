@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <head>
   <title>Chart.js testing 1</title>
+  <style type="text/css">
+    #stckedbars {
+      width: 50%;
+    }
+  </style>
 </head>
 <body>
   <div id="totals">
@@ -10,12 +15,12 @@
   </div>
 
   <div id="stackedbars">
-    <h3>Cold/Warm/Loyal</h1>
     <canvas id="chart1" width="400" height="400"></canvas>
   </div>
 
 </body>
 <script src="node_modules/chart.js/dist/Chart.bundle.min.js"></script>
-<script src="js/graphjs1.js"></script>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="js/graphjs1-v2.js"></script>
 
 </html>

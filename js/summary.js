@@ -65,6 +65,12 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
       }
     };
 
+    // Adding the labels as objects to both JSON files
+    forExport.supporterLabels = supporterTypes;
+    forExport.channelLabels = channelTypes;
+    forExportCollectors.supporterLabels = supporterTypes;
+    forExportCollectors.channelLabels = channelTypes;
+
     // DEBUG OPTION - log the object to verify it has worked
     // console.log(forExportCollectors);
 
