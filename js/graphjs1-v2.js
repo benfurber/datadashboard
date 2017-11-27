@@ -11,26 +11,21 @@ var ajaxProcess = $.ajax({
   var backgroundColours = ["#3e95cd", "#8e5ea2","#3cba9f", "#e8c3b9", "#c45850"];
 
   var theData = [];
+  for (var i = 0, len = 5; i < len; i++) {
+      var item = {};
+      item.label = cLabels[i].toUpperCase();
+      item.backgroundColor = backgroundColours[i];
+      item.data = [];
+      for (var x = 0, len2 = sLabels.length; x < len2; x++) {
+        var cData = collectionsData[sLabels[x]][cLabels[i]];
+        item.data.push(cData);
+      }
+      theData.push(item);
+  };
 
   var chart1Data = {
-    labels: sLabels,
-    datasets: [
-      {
-        label: "Channel1",
-        backgroundColor: "#3e95cd",
-        data: [3,4,1]
-      },
-      {
-        label: "Channel2",
-        backgroundColor: "#8e5ea2",
-        data: [5,0,7]
-      },
-      {
-        label: "Channel3",
-        backgroundColor: "#3cba9f",
-        data: [2,3,2]
-      }
-    ]
+    labels: sLabels.map(x => x.toUpperCase()),
+    datasets: theData
   };
 
   new Chart(document.getElementById("chart1"), {
