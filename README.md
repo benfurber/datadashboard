@@ -10,6 +10,7 @@ npm install d3-collection
 npm install d3-dsv
 npm install http-server
 npm install csv
+npm install jquery
 ```
 Considering scraping d3, it's so complected and chartsjs looks a lot simpler:
 ```

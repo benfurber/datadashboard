@@ -35,6 +35,13 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
     for (var i = 0, len = supporterTypes.length; i < len; i++) {
       forExport[supporterTypes[i]] = channelsObject;
     };
+    // Now building the chartsjs summary arrays item (again nested so a child/parent set of loops needed)
+    forExport.chartsSummary = {};
+    for (var i = 0, len = channelTypes.length; i < len; i++) {
+
+    };
+
+    // Needs to look like: chartsSummary: {[0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0]}
 
     // My innefficient way to make the child objects different
     forExport = JSON.stringify(forExport);
@@ -52,6 +59,7 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
       var tChannel = result[i]["theChannel"].toLowerCase();
       forExport[sType][tChannel] += 1;
     };
+
 
     // Collectors JSON populating
     var uniqueIDs = [];

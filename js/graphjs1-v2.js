@@ -10,17 +10,7 @@ var ajaxProcess = $.ajax({
 
   var backgroundColours = ["#3e95cd", "#8e5ea2","#3cba9f", "#e8c3b9", "#c45850"];
 
-  var dataTesting = [];
-  for (var i = 0, len = cLabels.length; i < len; i++) {
-    var theLabel = cLabels[i];
-    var theData = [];
-    for (var x = 0, len2 = sLabels.length; x < len2; x++) { theData.push(collectionsData[sLabels[x]][theLabel]) };
-    {
-      label: theLabel,
-      backgroundColor = backgroundColours[i],
-      data = theData
-    }
-  };
+  var theData = [];
 
   var chart1Data = {
     labels: sLabels,
@@ -43,7 +33,6 @@ var ajaxProcess = $.ajax({
     ]
   };
 
-
   new Chart(document.getElementById("chart1"), {
       type: 'horizontalBar',
       data: chart1Data,
@@ -54,12 +43,8 @@ var ajaxProcess = $.ajax({
           text: 'Cold/Warm/Loyal'
         },
         scales: {
-          xAxes: [{
-            stacked: true,
-          }],
-          yAxes: [{
-            stacked: true,
-          }]
+          xAxes: [{ stacked: true }],
+          yAxes: [{ stacked: true }]
         }
       }
   });
