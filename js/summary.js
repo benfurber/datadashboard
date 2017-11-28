@@ -36,13 +36,16 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
       forExport[supporterTypes[i]] = channelsObject;
     };
 
+    // Adding the supporter types and channels to the object
+    forExport.supporterLabels = supporterTypes;
+    forExport.channelLabels = channelTypes;
+
+    // Adding an empty 'total' item to the object
+    forExport.total = 0;
+
     // My innefficient way to make the child objects different
     forExport = JSON.stringify(forExport);
     forExport = JSON.parse(forExport);
-
-    // Adding the supporter types and channels to the JSON
-    forExport.supporterLabels = supporterTypes;
-    forExport.channelLabels = channelTypes;
 
     // Copy of the above object for collectors
     var forExportCollectors = forExport;
@@ -55,18 +58,8 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
       var sType = result[i]["supporterType"].toLowerCase();
       var tChannel = result[i]["theChannel"].toLowerCase();
       forExport[sType][tChannel] += 1;
+      forExport.total += 1;
     };
-
-    var dataItems = [];
-    for (var i = 0, len = channelTypes.length; i < len; i++) {
-      var item = [];
-      for (var x = 0, len2 = supporterTypes.length; x < len2; x++) {
-        var cData = forExport[supporterTypes[x]][channelTypes[i]];
-        item.push(cData);
-      }
-      dataItems.push(item);
-    };
-    forExport.chartData = dataItems;
 
     // Collectors JSON populating
     var uniqueIDs = [];
@@ -76,12 +69,37 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
         var sType = result[i]["supporterType"].toLowerCase();
         var tChannel = result[i]["theChannel"].toLowerCase();
         forExportCollectors[sType][tChannel] += 1;
+        forExportCollectors.total += 1;
         uniqueIDs.push(tempID);
       }
     };
 
     // DEBUG OPTION - log the object to verify it has worked
     // console.log(forExportCollectors);
+
+    // Collections data for charts.js
+    var collectionsDataItems = [];
+    for (var i = 0, len = channelTypes.length; i < len; i++) {
+      var item = [];
+      for (var x = 0, len2 = supporterTypes.length; x < len2; x++) {
+        var cData = forExport[supporterTypes[x]][channelTypes[i]];
+        item.push(cData);
+      }
+      collectionsDataItems.push(item);
+    };
+    forExport.chartData = collectionsDataItems;
+
+    // Collectors data for charts.js
+    var collectorsDataItems = [];
+    for (var i = 0, len = channelTypes.length; i < len; i++) {
+      var item = [];
+      for (var x = 0, len2 = supporterTypes.length; x < len2; x++) {
+        var cData = forExportCollectors[supporterTypes[x]][channelTypes[i]];
+        item.push(cData);
+      }
+      collectorsDataItems.push(item);
+    };
+    forExportCollectors.chartData = collectorsDataItems;
 
     // Convert EACH ONE to JSON
     forExport = JSON.stringify(forExport, null, '\t');
