@@ -5,21 +5,27 @@ var ajaxProcess = $.ajax({
 }).done(function (results) {
   collectionsData = results;
 
+  // Simplifying some items that have to be referred to further down.
   var cLabels = collectionsData.channelLabels;
   var sLabels = collectionsData.supporterLabels;
+  var chartData = collectionsData.chartData;
 
+  // Chart colours
   var backgroundColours = ["#3e95cd", "#8e5ea2","#3cba9f", "#e8c3b9", "#c45850"];
 
+  // Define the empty array for the chart data
   var theData = [];
-  for (var i = 0, len = 5; i < len; i++) {
+
+  // Build the content of the data array
+  for (var i = 0, len = cLabels.length; i < len; i++) {
+
+      // Build each bar for the array
       var item = {};
       item.label = cLabels[i].toUpperCase();
       item.backgroundColor = backgroundColours[i];
-      item.data = [];
-      for (var x = 0, len2 = sLabels.length; x < len2; x++) {
-        var cData = collectionsData[sLabels[x]][cLabels[i]];
-        item.data.push(cData);
-      }
+      item.data = chartData[i];
+
+      // Push the bar the array
       theData.push(item);
   };
 

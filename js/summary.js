@@ -40,6 +40,10 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
     forExport = JSON.stringify(forExport);
     forExport = JSON.parse(forExport);
 
+    // Adding the supporter types and channels to the JSON
+    forExport.supporterLabels = supporterTypes;
+    forExport.channelLabels = channelTypes;
+
     // Copy of the above object for collectors
     var forExportCollectors = forExport;
     forExportCollectors = JSON.stringify(forExportCollectors);
@@ -53,6 +57,16 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
       forExport[sType][tChannel] += 1;
     };
 
+    var dataItems = [];
+    for (var i = 0, len = channelTypes.length; i < len; i++) {
+      var item = [];
+      for (var x = 0, len2 = supporterTypes.length; x < len2; x++) {
+        var cData = forExport[supporterTypes[x]][channelTypes[i]];
+        item.push(cData);
+      }
+      dataItems.push(item);
+    };
+    forExport.chartData = dataItems;
 
     // Collectors JSON populating
     var uniqueIDs = [];
@@ -65,12 +79,6 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
         uniqueIDs.push(tempID);
       }
     };
-
-    // Adding the labels as objects to both JSON files
-    forExport.supporterLabels = supporterTypes;
-    forExport.channelLabels = channelTypes;
-    forExportCollectors.supporterLabels = supporterTypes;
-    forExportCollectors.channelLabels = channelTypes;
 
     // DEBUG OPTION - log the object to verify it has worked
     // console.log(forExportCollectors);
