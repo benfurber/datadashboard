@@ -32,6 +32,8 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
 
     // Can then built the parent object with the SAME child object
     var forExport = {};
+
+    // For the collections
     for (var i = 0, len = supporterTypes.length; i < len; i++) {
       forExport[supporterTypes[i]] = channelsObject;
     };

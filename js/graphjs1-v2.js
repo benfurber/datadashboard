@@ -16,6 +16,8 @@ var ajaxProcess = $.ajax({
 }
 ).done(function (results1, results2) {
 
+  console.log(results2);
+
   // Simplifying some items that have to be referred to further down.
   var cLabels = results1.channelLabels;
   var sLabels = results1.supporterLabels;
@@ -40,6 +42,12 @@ var ajaxProcess = $.ajax({
       dataset1.push(item);
   };
 
+  var standardOptions = {
+    legend: { display: true },
+    title: { display: false },
+    scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] }
+  }
+
   // Build the collections chart
   new Chart(document.getElementById("chart1"), {
       type: 'horizontalBar',
@@ -47,11 +55,7 @@ var ajaxProcess = $.ajax({
         labels: sLabels.map(x => x.toUpperCase()),
         datasets: dataset1
       },
-      options: {
-        legend: { display: true },
-        title: { display: false },
-        scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] }
-      }
+      options: standardOptions
   });
 
   // Build the collectors chart
@@ -61,11 +65,7 @@ var ajaxProcess = $.ajax({
         labels: sLabels.map(x => x.toUpperCase()),
         datasets: dataset2
       },
-      options: {
-        legend: { display: true },
-        title: { display: false },
-        scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] }
-      }
+      options: standardOptions
   });
 
 });
