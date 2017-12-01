@@ -1,46 +1,41 @@
-var collectionsData = {};
-
-var urlOptions = ['../data/processed/byChannel-Collections.json', '../data/processed/byChannel-Collectors.json'];
-var urlOptionsSelect = 0;
-
 // Chart colours
 var backgroundColours = ["#3e95cd", "#8e5ea2","#3cba9f", "#e8c3b9", "#c45850"];
 
 var ajaxProcess = $.ajax({
-  url: urlOptions[0],
-  dataType: 'json',
-},
-{
-  url: urlOptions[1],
+  url: '../data/processed/byChannel.json',
   dataType: 'json',
 }
-).done(function (results1, results2) {
-
-  console.log(results2);
+).done(function (results) {
 
   // Simplifying some items that have to be referred to further down.
-  var cLabels = results1.channelLabels;
-  var sLabels = results1.supporterLabels;
+  var cLabels = results.channelLabels;
+  var sLabels = results.supporterLabels;
 
-  var collectionsData = results1.chartData;
-  var collectorsData = results2.chartData;
+  // Define the empty arrays for the chart data
+  var collectionsData = [];
+  var collectorsData = [];
 
-  // Define the empty array for the chart data
-  var dataset1 = [];
-  var dataset2 = [];
-
-  // Build the content of the collections data array
+  // Build the contents of the data arrays
   for (var i = 0, len = cLabels.length; i < len; i++) {
 
-      // Build each bar for the array
-      var item = {};
-      item.label = cLabels[i].toUpperCase();
-      item.backgroundColor = backgroundColours[i];
-      item.data = collectionsData[i];
+      // Build each bar for both arrays
+      var item1 = {};
+      var item2 = {};
+      item1.label = cLabels[i].toUpperCase();
+      item2.label = cLabels[i].toUpperCase();
+      item1.backgroundColor = backgroundColours[i];
+      item2.backgroundColor = backgroundColours[i];
 
-      // Push the bar the array
-      dataset1.push(item);
+      // Add data and push to collections array
+      item1.data = results.collections.chartData[i];
+      collectionsData.push(item1);
+
+      // Add data and push to collectors array
+      item2.data = results.collectors.chartData[i];
+      collectorsData.push(item2);
+      console.log(item2);
   };
+
 
   var standardOptions = {
     legend: { display: true },
@@ -53,7 +48,7 @@ var ajaxProcess = $.ajax({
       type: 'horizontalBar',
       data: {
         labels: sLabels.map(x => x.toUpperCase()),
-        datasets: dataset1
+        datasets: collectionsData
       },
       options: standardOptions
   });
@@ -63,7 +58,7 @@ var ajaxProcess = $.ajax({
       type: 'horizontalBar',
       data: {
         labels: sLabels.map(x => x.toUpperCase()),
-        datasets: dataset2
+        datasets: collectorsData
       },
       options: standardOptions
   });
