@@ -1,6 +1,3 @@
-// Chart colours
-var backgroundColours = ["#3e95cd", "#8e5ea2","#3cba9f", "#e8c3b9", "#c45850"];
-
 var ajaxProcess = $.ajax({
   url: '../data/processed/byChannel.json',
   dataType: 'json',
@@ -11,56 +8,49 @@ var ajaxProcess = $.ajax({
   var cLabels = results.channelLabels;
   var sLabels = results.supporterLabels;
 
-  // Define the empty arrays for the chart data
-  var collectionsData = [];
-  var collectorsData = [];
+  // Chart colours
+  var backgroundColours = ["#3e95cd", "#8e5ea2","#3cba9f", "#e8c3b9", "#c45850"];
 
-  // Build the contents of the data arrays
-  for (var i = 0, len = cLabels.length; i < len; i++) {
+  function theChart(dataType,location) {
+    // Define the empty array for the chart data
+    var theData = [];
 
-      // Build each bar for both arrays - So not dry, must be a way...
-      var item1 = {};
-      var item2 = {};
-      item1.label = cLabels[i].toUpperCase();
-      item2.label = cLabels[i].toUpperCase();
-      item1.backgroundColor = backgroundColours[i];
-      item2.backgroundColor = backgroundColours[i];
+    // Build the contents of the data array
+    for (var i = 0, len = cLabels.length; i < len; i++) {
 
-      // Add data and push to collections array
-      item1.data = results.collections.chartData[i];
-      collectionsData.push(item1);
+        // Build each bar for the array
+        var item = {};
+        item.label = cLabels[i].toUpperCase();
+        item.backgroundColor = backgroundColours[i];
 
-      // Add data and push to collectors array
-      item2.data = results.collectors.chartData[i];
-      collectorsData.push(item2);
+        // Add data and push to collections array
+        item.data = results[dataType].chartData[i];
+        theData.push(item);
+    };
+
+    console.log(theData);
+
+    // Chart options
+    var standardOptions = {
+      legend: { display: true },
+      title: { display: false },
+      scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] }
+    };
+
+    // Build the chart
+    new Chart(document.getElementById(location), {
+        type: 'horizontalBar',
+        data: {
+          labels: sLabels.map(x => x.toUpperCase()),
+          datasets: theData
+        },
+        options: standardOptions
+    });
+
   };
 
-  // Options for both charts
-  var standardOptions = {
-    legend: { display: true },
-    title: { display: false },
-    scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] }
-  }
-
-  // Build the collections chart
-  new Chart(document.getElementById("chart1"), {
-      type: 'horizontalBar',
-      data: {
-        labels: sLabels.map(x => x.toUpperCase()),
-        datasets: collectionsData
-      },
-      options: standardOptions
-  });
-
-  // Build the collectors chart
-  new Chart(document.getElementById("chart2"), {
-      type: 'horizontalBar',
-      data: {
-        labels: sLabels.map(x => x.toUpperCase()),
-        datasets: collectorsData
-      },
-      options: standardOptions
-  });
+  theChart('collections','chart1');
+  theChart('collectors','chart2');
 
   // Edit the page headings with the totalShifts
   $("#totalShifts").append(results.collections.total);

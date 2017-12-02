@@ -10,33 +10,40 @@ var ajaxProcess = $.ajax({
 
     var theGraph = 'collections';
 
-    // Build the title row
-    var tColumnTitles = "";
+    function tables(type,location) {
 
-    tColumnTitles += "<th></th>" // Empty cell at the beginning
+      // Build the title row
+      var tColumnTitles = "";
 
-    for ( var i = 0; i < cLabels.length; i++ ) {
-      tColumnTitles += "<th>" + cLabels[i].toUpperCase() + "</th> "
-    };
+      tColumnTitles += "<th></th>" // Empty cell at the beginning
 
-    // Build each row
-    var tRowsCollections = [];
-    for ( var i = 0; i < sLabels.length; i++ ) {
+      for ( var i = 0; i < cLabels.length; i++ ) {
+        tColumnTitles += "<th>" + cLabels[i].toUpperCase() + "</th> "
+      };
 
-      var tcells = [];
+      // Build each row
+      var tRowsCollections = [];
+      for ( var i = 0; i < sLabels.length; i++ ) {
 
-      // The row title
-      tcells += ["<th scope='row'>" + sLabels[i].toUpperCase() + "</th>"];
+        var tcells = [];
 
-      // Each content cell
-      for ( var x = 0; x < cLabels.length; x++ ) {
-        tcells += ["<td>" + results[theGraph][sLabels[i]][cLabels[x]] + "</td>"];
-      }
+        // The row title
+        tcells += ["<th scope='row'>" + sLabels[i].toUpperCase() + "</th>"];
 
-      tRowsCollections += ["<tr>" + tcells + "</tr>"];
+        // Each content cell
+        for ( var x = 0; x < cLabels.length; x++ ) {
+          tcells += ["<td>" + results[type][sLabels[i]][cLabels[x]] + "</td>"];
+        };
+
+        tRowsCollections += ["<tr>" + tcells + "</tr>"];
+
+      };
+
+      return $(location).append("<thead><tr>" + tColumnTitles + "</tr></thead><tbody>" + tRowsCollections + "</tbody>");
 
     }
 
-    $("#table1").append("<thead><tr>" + tColumnTitles + "</tr></thead><tbody>" + tRowsCollections + "</tbody>");
+    tables('collections', '#table1');
+    tables('collectors', '#table2');
 
 });
