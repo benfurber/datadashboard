@@ -1,50 +1,52 @@
 <!DOCTYPE html>
 <head>
   <title>Chart.js testing 1</title>
-  <style>
-    .row {
-      float: left;
-      width: 100%;
-    }
-    .col6 {
-      float: left;
-      width: 50%;
-    }
-  </style>
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
-  <div id="totals">
-    <h2 id="totalShifts">Total shifts: </h2>
-    <h2 id="totalCollectors">Total collectors: </h2>
+  <div class="header">
+    <div id="totals">
+      <h2 id="totalShifts">Total shifts: </h2>
+      <h2 id="totalCollectors">Total collectors: </h2>
+    </div>
   </div>
 
-  <div class="row">
-    <h3>Collections - Cold/Warm/Loyal by Channel</h3>
+  <div class="container-fluid">
 
-    <div class="col6 graph">
+  <div class="row">
+    <div class="col-12">
+      <h3>Collections - Cold/Warm/Loyal by Channel</h3>
+    </div>
+
+    <div class="col-6 graph">
       <canvas id="chart1" width="400" height="400"></canvas>
     </div>
 
-    <div class="col6 table">
-      <table id="table1"></table>
+    <div class="col-6">
+      <table class="table" id="table1"></table>
     </div>
   </div>
 
   <div class="row">
-    <h3>Collectors - Cold/Warm/Loyal by Channel</h3>
+    <div class="col-12">
+      <h3>Collectors - Cold/Warm/Loyal by Channel</h3>
+    </div>
 
-    <div class="col6 graph">
+    <div class="col-6 graph">
       <canvas id="chart2" width="400" height="400"></canvas>
     </div>
 
-    <div class="col6 table" id="table2">
+    <div class="col-6" id="table2">
     </div>
+  </div>
+
   </div>
 
 </body>
 <script src="node_modules/chart.js/dist/Chart.bundle.min.js"></script>
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="js/graphjs1-v2.js"></script>
+<script src="node_modules/pivottable/dist/pivot.min.js"></script>
 <script src="js/tables1.js"></script>
 
 </html>

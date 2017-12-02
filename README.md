@@ -5,16 +5,14 @@ A Javascript based data visualisation programme. The main library being used is 
 
 ### 1. Set-up d3 and simple node server (https://github.com/indexzero/http-server)
 ```
-npm install d3
-npm install d3-collection
-npm install d3-dsv
 npm install http-server
 npm install csv
 npm install jquery
-```
-Considering scraping d3, it's so complected and chartsjs looks a lot simpler:
-```
+
 npm install chart.js --save
+npm install pivottable
+npm install popper
+npm install bootstrap@4.0.0-beta.2
 ```
 ```
 cd /path/to/dir
@@ -57,3 +55,6 @@ http://learnjsdata.com/combine_data.html
 
 ### 7. Grouping data:
 http://learnjsdata.com/group_data.html
+
+### Tech debt
+- Graph and table scripts aren't functions
