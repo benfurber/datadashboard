@@ -81,7 +81,7 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
     for (var i = 0, len = channelTypes.length; i < len; i++) {
       var item1 = [];
       for (var x = 0, len2 = supporterTypes.length; x < len2; x++) {
-        var cData = forExport.collectors[supporterTypes[x]][channelTypes[i]];
+        var cData = forExport.collections[supporterTypes[x]][channelTypes[i]];
         item1.push(cData);
       }
       console.log(item1);

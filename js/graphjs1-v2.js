@@ -18,7 +18,7 @@ var ajaxProcess = $.ajax({
   // Build the contents of the data arrays
   for (var i = 0, len = cLabels.length; i < len; i++) {
 
-      // Build each bar for both arrays
+      // Build each bar for both arrays - So not dry, must be a way...
       var item1 = {};
       var item2 = {};
       item1.label = cLabels[i].toUpperCase();
@@ -33,10 +33,9 @@ var ajaxProcess = $.ajax({
       // Add data and push to collectors array
       item2.data = results.collectors.chartData[i];
       collectorsData.push(item2);
-      console.log(item2);
   };
 
-
+  // Options for both charts
   var standardOptions = {
     legend: { display: true },
     title: { display: false },
@@ -62,5 +61,9 @@ var ajaxProcess = $.ajax({
       },
       options: standardOptions
   });
+
+  // Edit the page headings with the totalShifts
+  $("#totalShifts").append(results.collections.total);
+  $("#totalCollectors").append(results.collectors.total);
 
 });

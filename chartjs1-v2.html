@@ -2,7 +2,11 @@
 <head>
   <title>Chart.js testing 1</title>
   <style>
-    #stackedbars {
+    .row {
+      float: left;
+      width: 100%;
+    }
+    .col6 {
       float: left;
       width: 50%;
     }
@@ -12,22 +16,35 @@
   <div id="totals">
     <h2 id="totalShifts">Total shifts: </h2>
     <h2 id="totalCollectors">Total collectors: </h2>
-    <h2 id="theDate">Date: </h2>
   </div>
 
-  <div id="stackedbars">
-    <h3>Cold/Warm/Loyal collections by Channel</h3>
-    <canvas id="chart1" width="400" height="400"></canvas>
+  <div class="row">
+    <h3>Collections - Cold/Warm/Loyal by Channel</h3>
+
+    <div class="col6 graph">
+      <canvas id="chart1" width="400" height="400"></canvas>
+    </div>
+
+    <div class="col6 table">
+      <table id="table1"></table>
+    </div>
   </div>
 
-  <div id="stackedbars">
-    <h3>Cold/Warm/Loyal collectors by Channel</h3>
-    <canvas id="chart2" width="400" height="400"></canvas>
+  <div class="row">
+    <h3>Collectors - Cold/Warm/Loyal by Channel</h3>
+
+    <div class="col6 graph">
+      <canvas id="chart2" width="400" height="400"></canvas>
+    </div>
+
+    <div class="col6 table" id="table2">
+    </div>
   </div>
 
 </body>
 <script src="node_modules/chart.js/dist/Chart.bundle.min.js"></script>
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="js/graphjs1-v2.js"></script>
+<script src="js/tables1.js"></script>
 
 </html>
