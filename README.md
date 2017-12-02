@@ -57,4 +57,5 @@ http://learnjsdata.com/combine_data.html
 http://learnjsdata.com/group_data.html
 
 ### Tech debt
-- Graph and table scripts aren't functions
+- Data summary file isn't a function 
+- Loads of modules installed that I tried and then disregarded
