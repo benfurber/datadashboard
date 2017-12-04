@@ -16,93 +16,103 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
         console.log(err);
     }
 
-    // The supporter types and channels
-    var supporterTypes = ["cold", "warm", "loyal"];
-    var channelTypes = ["email", "ppc", "search", "social", "offline"];
+    // Function for the labels for each column
+    function columnLabels(columnName) {
 
-    // Building the JSON structures
-    // Build the nested channels object first
-    var channelsObject = {};
-    for (var i = 0, len = channelTypes.length; i < len; i++) {
-      channelsObject[channelTypes[i]] = 0;
+      var object = [];
+      for ( var i = 0; i < result.length; i++ ) {
+        item = result[i][columnName]
+        object.push(item);
+      };
+
+      object = [...new Set(object)];
+      object.sort(); // Alphabetic order
+
+      return object;
+    }
+
+    // Call the labels function
+    var supporterTypes = columnLabels('supporterType');
+    var channelTypes = columnLabels('theChannel');
+
+
+    // CUSTOM SORTING OF COLUMNS HERE
+    // Move 'Loyal' to be the last supporter label
+    supporterTypes.splice(1,1);
+    supporterTypes.push('Loyal');
+
+
+    // Function adding each section of the JSON
+    function addObject(name,uniq=false) {
+
+      // Adding these instant variables for reasons I don't quite understand.
+      this.name = name;
+      this.uniq = uniq;
+
+      // Building the structure of the json
+      var object = {};
+
+      for ( var i = 0; i < supporterTypes.length; i++ ) {
+        // Adding each type of supporter
+        object[supporterTypes[i]] = {};
+        for (var x = 0; x < channelTypes.length; x++ ) {
+          // Adding each channel to each type of supporter
+          object[supporterTypes[i]][channelTypes[x]] = 0;
+        };
+      };
+      object['Total'] = 0;
+      object['ChartData'] = [];
+
+      // Populating the object
+
+      var uniqTracker = []; // Needed for unique if statement later down..
+
+      for ( var i = 0; i < result.length; i++ ) {
+
+        var item = result[i];
+
+        // Runs if you need a unique total
+        if (uniq) {
+          if ( uniqTracker[item.regID] != item.regID ) {
+            uniqTracker.push(item.regID);
+            object['Total']++;
+            object[item.supporterType][item.theChannel]++;
+          };
+        }
+
+        // Run if you don't need a unique total
+        else {
+          object['Total']++;
+          object[item.supporterType][item.theChannel]++;
+        };
+
+      }
+
+      // Populating the ChartData object for Charts.js
+      // While the rest of the JSON is channels within support type, the chart has to be the other way around.
+
+      for ( var i = 0; i < channelTypes.length; i++) {
+        var chartItem = [];
+        for ( var x = 0; x < supporterTypes.length; x++ ) {
+          chartItem.push(object[supporterTypes[x]][channelTypes[i]]);
+        }
+        object['ChartData'].push(chartItem);
+      }
+
+      return object;
+
     };
 
-    // Can then built the parent object with the SAME child object
-    var collectionsObjects = {};
-    var collectorsObjects = {};
 
-    // The children into the parents
-    for (var i = 0, len = supporterTypes.length; i < len; i++) {
-      collectionsObjects[supporterTypes[i]] = channelsObject;
-      collectorsObjects[supporterTypes[i]] = channelsObject;
-    };
-
-    // And the parents into the grand-parents
+    // Build the object that will be exported
     var forExport = {};
-    forExport.collections = collectionsObjects;
-    forExport.collectors = collectorsObjects;
 
-    // Adding the supporter types and channels to the object
-    forExport.supporterLabels = supporterTypes;
-    forExport.channelLabels = channelTypes;
+    // Populate the export object with the above function
+    forExport['Collections'] = addObject('collections');
+    forExport['Collectors'] = addObject('collectors',true);
 
-    // Adding an empty 'total' item to the object
-    forExport.collections.total = 0;
-    forExport.collectors.total = 0;
 
-    // My innefficient way to make the child objects different otherwise the following loops with populate in multiple places
-    forExport = JSON.stringify(forExport);
-    forExport = JSON.parse(forExport);
-
-    // The main bit - Populating of the JSON
-    // Collections JSON populating
-    for (var i = 0, len = result.length; i < len; i++) {
-      var sType = result[i]["supporterType"].toLowerCase();
-      var tChannel = result[i]["theChannel"].toLowerCase();
-      forExport.collections[sType][tChannel] += 1;
-      forExport.collections.total += 1;
-    };
-
-    // Collectors JSON populating
-    var uniqueIDs = [];
-    for (var i = 0, len = result.length; i < len; i++) {
-      var tempID = result[i]["regID"];
-      if (tempID != uniqueIDs[tempID]) {
-        var sType = result[i]["supporterType"].toLowerCase();
-        var tChannel = result[i]["theChannel"].toLowerCase();
-        forExport.collectors[sType][tChannel] += 1;
-        forExport.collectors.total += 1;
-        uniqueIDs.push(tempID);
-      }
-    };
-
-    // Collections data for charts.js
-    var collectionsDataItems = [];
-    for (var i = 0, len = channelTypes.length; i < len; i++) {
-      var item1 = [];
-      for (var x = 0, len2 = supporterTypes.length; x < len2; x++) {
-        var cData = forExport.collections[supporterTypes[x]][channelTypes[i]];
-        item1.push(cData);
-      }
-      console.log(item1);
-      collectionsDataItems.push(item1);
-    };
-    forExport.collections.chartData = collectionsDataItems;
-
-    // Collectors data for charts.js
-    var collectorsDataItems = [];
-    for (var i = 0, len = channelTypes.length; i < len; i++) {
-      var item2 = [];
-      for (var x = 0, len2 = supporterTypes.length; x < len2; x++) {
-        var cData = forExport.collectors[supporterTypes[x]][channelTypes[i]];
-        item2.push(cData);
-      }
-      console.log(item2);
-      collectorsDataItems.push(item2);
-    };
-    forExport.collectors.chartData = collectorsDataItems;
-
-    // Convert to JSON (again)
+    // Final command
     forExport = JSON.stringify(forExport, null, '\t');
 
     // Write the collections JSON to a file
