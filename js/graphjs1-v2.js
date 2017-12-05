@@ -26,10 +26,10 @@ var ajaxProcess = $.ajax({
   // Calling this function a lot in the tables function below
 
   function dataSummaries(data,title,location) {
-    $(location).append("<h4>" + title + ": " + data + "</h4>");
+    $(location).append("<span>" + title + ": " + data + "</span><br/>");
   };
 
-  // Charts function
+  // Charts functions
 
   function theChart(dataType,location) {
     // Define the empty array for the chart data
@@ -60,6 +60,34 @@ var ajaxProcess = $.ajax({
         type: 'horizontalBar',
         data: {
           labels: sLabels,
+          datasets: theData
+        },
+        options: standardOptions
+    });
+
+  };
+
+  function lineChart(location) {
+    // Define the empty array for the chart data
+    var theData = [{
+      data: [1,2,1,3,5],
+      label: 'All',
+      borderColor: "#3e95cd",
+      fill: false
+    }];
+
+    var dates = ["01/01/2018","02/01/2018","03/01/2018","04/01/2018","05/01/2018"]
+
+    // Chart options
+    var standardOptions = {
+      title: { display: false }
+    };
+
+    // Build the chart
+    new Chart(document.getElementById(location), {
+        type: 'line',
+        data: {
+          labels: dates,
           datasets: theData
         },
         options: standardOptions
@@ -109,7 +137,7 @@ var ajaxProcess = $.ajax({
 
     $(location + " table").append("<thead><tr>" + tColumnTitles + "</tr></thead><tbody>" + tRowsCollections + "</tbody>");
     $(location).append('<div class="col-12 summary-title"></div>');
-    $(location + " .summary-title").append("<h4>Totals</h4>");
+    $(location + " .summary-title").append("<p class='lead'><strong>Total: " + results[type]['Total'] + "</strong></p>");
 
     $(location).append('<div class="col-6 first-col"></div>')
     for ( var i = 0; i < sLabels.length; i++ ) { dataSummaries(runningTotals[sLabels[i]],sLabels[i],location + " .first-col"); }
@@ -127,5 +155,7 @@ var ajaxProcess = $.ajax({
   tables('Collectors', '#table2');
 
   pageTitles();
+
+  lineChart('chart3');
 
 });
