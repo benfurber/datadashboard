@@ -41,6 +41,21 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
     supporterTypes.splice(1,1);
     supporterTypes.push('Loyal');
 
+    // Adding each label to the object
+    function addLabels() {
+
+      var labelsArray = {};
+
+      function eachLabel(title,content) {
+        labelsArray[title] = content;
+      };
+
+      eachLabel('supporterTypes',supporterTypes);
+      eachLabel('channelTypes',channelTypes);
+
+      return labelsArray;
+    }
+
 
     // Function adding each section of the JSON
     function addObject(name,uniq=false) {
@@ -61,7 +76,7 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
         };
       };
       object['Total'] = 0;
-      object['ChartData'] = [];
+      object['chartData'] = [];
 
       // Populating the object
 
@@ -96,13 +111,12 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
         for ( var x = 0; x < supporterTypes.length; x++ ) {
           chartItem.push(object[supporterTypes[x]][channelTypes[i]]);
         }
-        object['ChartData'].push(chartItem);
+        object['chartData'].push(chartItem);
       }
 
       return object;
 
     };
-
 
     // Build the object that will be exported
     var forExport = {};
@@ -110,6 +124,7 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
     // Populate the export object with the above function
     forExport['Collections'] = addObject('collections');
     forExport['Collectors'] = addObject('collectors',true);
+    forExport['labels'] = addLabels();
 
 
     // Final command

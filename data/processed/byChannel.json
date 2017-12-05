@@ -1,32 +1,37 @@
 {
-	"collections": {
-		"cold": {
-			"email": 4,
-			"ppc": 4,
-			"search": 4,
-			"social": 0,
-			"offline": 0
+	"Collections": {
+		"Cold": {
+			"Email": 4,
+			"Offline": 0,
+			"PPC": 4,
+			"Search": 4,
+			"Social": 0
 		},
-		"warm": {
-			"email": 2,
-			"ppc": 0,
-			"search": 4,
-			"social": 0,
-			"offline": 0
+		"Warm": {
+			"Email": 2,
+			"Offline": 0,
+			"PPC": 0,
+			"Search": 4,
+			"Social": 0
 		},
-		"loyal": {
-			"email": 0,
-			"ppc": 0,
-			"search": 7,
-			"social": 2,
-			"offline": 1
+		"Loyal": {
+			"Email": 0,
+			"Offline": 1,
+			"PPC": 0,
+			"Search": 7,
+			"Social": 2
 		},
-		"total": 28,
+		"Total": 28,
 		"chartData": [
 			[
 				4,
 				2,
 				0
+			],
+			[
+				0,
+				0,
+				1
 			],
 			[
 				4,
@@ -42,42 +47,42 @@
 				0,
 				0,
 				2
-			],
-			[
-				0,
-				0,
-				1
 			]
 		]
 	},
-	"collectors": {
-		"cold": {
-			"email": 1,
-			"ppc": 4,
-			"search": 4,
-			"social": 0,
-			"offline": 0
+	"Collectors": {
+		"Cold": {
+			"Email": 1,
+			"Offline": 0,
+			"PPC": 4,
+			"Search": 4,
+			"Social": 0
 		},
-		"warm": {
-			"email": 2,
-			"ppc": 0,
-			"search": 4,
-			"social": 0,
-			"offline": 0
+		"Warm": {
+			"Email": 2,
+			"Offline": 0,
+			"PPC": 0,
+			"Search": 4,
+			"Social": 0
 		},
-		"loyal": {
-			"email": 0,
-			"ppc": 0,
-			"search": 5,
-			"social": 2,
-			"offline": 1
+		"Loyal": {
+			"Email": 0,
+			"Offline": 1,
+			"PPC": 0,
+			"Search": 5,
+			"Social": 2
 		},
-		"total": 23,
+		"Total": 23,
 		"chartData": [
 			[
 				1,
 				2,
 				0
+			],
+			[
+				0,
+				0,
+				1
 			],
 			[
 				4,
@@ -93,24 +98,21 @@
 				0,
 				0,
 				2
-			],
-			[
-				0,
-				0,
-				1
 			]
 		]
 	},
-	"supporterLabels": [
-		"cold",
-		"warm",
-		"loyal"
-	],
-	"channelLabels": [
-		"email",
-		"ppc",
-		"search",
-		"social",
-		"offline"
-	]
+	"labels": {
+		"supporterTypes": [
+			"Cold",
+			"Warm",
+			"Loyal"
+		],
+		"channelTypes": [
+			"Email",
+			"Offline",
+			"PPC",
+			"Search",
+			"Social"
+		]
+	}
 }

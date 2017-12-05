@@ -4,48 +4,58 @@
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
-  <div class="header">
-    <div id="totals">
-      <h2 id="totalShifts">Total shifts: </h2>
-      <h2 id="totalCollectors">Total collectors: </h2>
-    </div>
-  </div>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#">Data Dashboard</a>
+  </nav>
 
-  <div class="container-fluid">
-
-  <div class="row">
-    <div class="col-12">
-      <h3>Collections - Cold/Warm/Loyal by Channel</h3>
+    <div class="jumbotron" id="totals">
+      <div class="container">
+        <h2 id="totalShifts">Total shifts: </h2>
+        <h2 id="totalCollectors">Total collectors: </h2>
+      </div>
     </div>
 
-    <div class="col-6 graph">
-      <canvas id="chart1" width="400" height="400"></canvas>
-    </div>
+    <div class="container">
 
-    <div class="col-6">
-      <table class="table" id="table1"></table>
-    </div>
-  </div>
+      <div class="col-12"><h3>Cold/Warm/Loyal by Channel</h3></div>
 
-  <div class="row">
-    <div class="col-12">
-      <h3>Collectors - Cold/Warm/Loyal by Channel</h3>
-    </div>
+      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="pills-collections-tab" data-toggle="pill" href="#pills-collections" role="tab" aria-controls="pills-collections" aria-selected="true">Collections</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-collectors-tab" data-toggle="pill" href="#pills-collectors" role="tab" aria-controls="pills-collectors" aria-selected="false">Collectors</a>
+        </li>
+      </ul>
 
-    <div class="col-6 graph">
-      <canvas id="chart2" width="400" height="400"></canvas>
-    </div>
+      <div class="tab-content" id="pills-tabContent">
 
-    <div class="col-6">
-      <table class="table" id="table2"></table>
-    </div>
-  </div>
+        <div class="tab-pane fade show active" id="pills-collections" role="tabpanel" aria-labelledby="collections-tab">
+          <div class="row">
+            <div class="col-12"><h3>Collections</h3></div>
+            <div class="col-6 graph"><canvas id="chart1" width="400" height="400"></canvas></div>
+            <div class="col-6 row" id="table1"><table class="table"></table></div>
+          </div>
+        </div>
 
-  </div>
+        <div class="tab-pane fade" id="pills-collectors" role="tabpanel" aria-labelledby="collectors-tab">
+          <div class="row">
+            <div class="col-12"><h3>Collectors</h3></div>
+            <div class="col-6 graph"><canvas id="chart2" width="400" height="400"></canvas></div>
+            <div class="col-6 row" id="table2"><table class="table"></table></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
 
 </body>
 <script src="node_modules/chart.js/dist/Chart.bundle.min.js"></script>
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
 <script src="js/graphjs1-v2.js"></script>
 
 </html>

@@ -4,11 +4,30 @@ var ajaxProcess = $.ajax({
 }).done(function (results) {
 
   // Regularly required labels/variables.
-  var cLabels = results.channelLabels;
-  var sLabels = results.supporterLabels;
+  var cLabels = results.labels.channelTypes;
+  var sLabels = results.labels.supporterTypes;
   var backgroundColours = ["#3e95cd", "#8e5ea2","#3cba9f", "#e8c3b9", "#c45850"];
 
   // Functions! (The model?)
+
+
+  // Titles
+
+  // Page titles
+  function pageTitles() {
+
+    // Edit the page headings with the totalShifts
+    $("#totalShifts").append(results.Collections.Total);
+    $("#totalCollectors").append(results.Collectors.Total);
+
+  };
+
+  // More specific Titles
+  // Calling this function a lot in the tables function below
+
+  function dataSummaries(data,title,location) {
+    $(location).append("<h4>" + title + ": " + data + "</h4>");
+  };
 
   // Charts function
 
@@ -21,7 +40,7 @@ var ajaxProcess = $.ajax({
 
         // Build each bar for the array
         var item = {};
-        item.label = cLabels[i].toUpperCase();
+        item.label = cLabels[i];
         item.backgroundColor = backgroundColours[i];
 
         // Add data and push to collections array
@@ -40,7 +59,7 @@ var ajaxProcess = $.ajax({
     new Chart(document.getElementById(location), {
         type: 'horizontalBar',
         data: {
-          labels: sLabels.map(x => x.toUpperCase()),
+          labels: sLabels,
           datasets: theData
         },
         options: standardOptions
@@ -58,51 +77,55 @@ var ajaxProcess = $.ajax({
     tColumnTitles += "<th></th>" // Empty cell at the beginning
 
     for ( var i = 0; i < cLabels.length; i++ ) {
-      tColumnTitles += "<th>" + cLabels[i].toUpperCase() + "</th> "
+      tColumnTitles += "<th>" + cLabels[i] + "</th> "
     };
 
-    // Build each row
+    // A running totals object for later on
+    var runningTotals = {};
+    for ( var i = 0; i < sLabels.length; i++ ) { runningTotals[sLabels[i]] = 0; }
+    for ( var i = 0; i < cLabels.length; i++ ) { runningTotals[cLabels[i]] = 0; }
+
+    // Build each row and add a total for each cell as we go to the running total
     var tRowsCollections = [];
+
     for ( var i = 0; i < sLabels.length; i++ ) {
 
       var tcells = [];
 
       // The row title
-      tcells += ["<th scope='row'>" + sLabels[i].toUpperCase() + "</th>"];
+      tcells += ["<th scope='row'>" + sLabels[i] + "</th>"];
 
       // Each content cell
       for ( var x = 0; x < cLabels.length; x++ ) {
-        tcells += ["<td>" + results[type][sLabels[i]][cLabels[x]] + "</td>"];
+        var theNumber = results[type][sLabels[i]][cLabels[x]];
+        tcells += ["<td>" + theNumber + "</td>"];
+        runningTotals[sLabels[i]] += theNumber;
+        runningTotals[cLabels[x]] += theNumber;
       };
 
       tRowsCollections += ["<tr>" + tcells + "</tr>"];
 
     };
 
-    return $(location).append("<thead><tr>" + tColumnTitles + "</tr></thead><tbody>" + tRowsCollections + "</tbody>");
+    $(location + " table").append("<thead><tr>" + tColumnTitles + "</tr></thead><tbody>" + tRowsCollections + "</tbody>");
+    $(location).append('<div class="col-12 summary-title"></div>');
+    $(location + " .summary-title").append("<h4>Totals</h4>");
+
+    $(location).append('<div class="col-6 first-col"></div>')
+    for ( var i = 0; i < sLabels.length; i++ ) { dataSummaries(runningTotals[sLabels[i]],sLabels[i],location + " .first-col"); }
+    $(location).append('<div class="col-6 second-col"></div>')
+    for ( var i = 0; i < cLabels.length; i++ ) { dataSummaries(runningTotals[cLabels[i]],cLabels[i],location + " .second-col"); }
 
   };
-
-  // Page titles
-
-  function pageTitles() {
-
-    // Edit the page headings with the totalShifts
-    $("#totalShifts").append(results.collections.total);
-    $("#totalCollectors").append(results.collectors.total);
-
-  };
-
 
   // Calling the functions (The view?)
 
-  theChart('collections','chart1');
-  tables('collections', '#table1');
+  theChart('Collections','chart1');
+  tables('Collections', '#table1');
 
-  theChart('collectors','chart2');
-  tables('collectors', '#table2');
+  theChart('Collectors','chart2');
+  tables('Collectors', '#table2');
 
   pageTitles();
-
 
 });
