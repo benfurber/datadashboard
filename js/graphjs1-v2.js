@@ -3,6 +3,11 @@ var ajaxProcess = $.ajax({
   dataType: 'json',
 }).done(function (results) {
 
+
+  var startDate = new Date(2018,0,01) // For some silly reason months are zero based (i.e. Jan = 0).
+  var endDate = new Date(2018,0,31)
+
+
   // Regularly required labels/variables.
   var cLabels = results.labels.channelTypes;
   var sLabels = results.labels.supporterTypes;
@@ -10,9 +15,7 @@ var ajaxProcess = $.ajax({
 
   // Functions! (The model?)
 
-
   // Titles
-
   // Page titles
   function pageTitles() {
 
@@ -70,8 +73,14 @@ var ajaxProcess = $.ajax({
   function lineChart(location) {
     // Define the empty array for the chart data
     var theData = [{
-      data: [1,2,1,3,5],
+      data: [5,7,4,2,50],
       label: 'All',
+      borderColor: "#444444",
+      fill: false
+    },
+    {
+      data: [2,2,3,0,2],
+      label: 'Email',
       borderColor: "#3e95cd",
       fill: false
     }];
