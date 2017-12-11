@@ -3,15 +3,12 @@ var ajaxProcess = $.ajax({
   dataType: 'json',
 }).done(function (results) {
 
-
-  var startDate = new Date(2018,0,01) // For some silly reason months are zero based (i.e. Jan = 0).
-  var endDate = new Date(2018,0,31)
-
-
   // Regularly required labels/variables.
-  var cLabels = results.labels.channelTypes;
-  var sLabels = results.labels.supporterTypes;
+  var channelTypesLabels = results.labels.channelTypes;
+  var supporterTypesLabels = results.labels.supporterTypes;
+  var allDatesLabels = results.labels.allDates;
   var backgroundColours = ["#3e95cd", "#8e5ea2","#3cba9f", "#e8c3b9", "#c45850"];
+
 
   // Functions! (The model?)
 
@@ -39,11 +36,11 @@ var ajaxProcess = $.ajax({
     var theData = [];
 
     // Build the contents of the data array
-    for (var i = 0, len = cLabels.length; i < len; i++) {
+    for (var i = 0, len = channelTypesLabels.length; i < len; i++) {
 
         // Build each bar for the array
         var item = {};
-        item.label = cLabels[i];
+        item.label = channelTypesLabels[i];
         item.backgroundColor = backgroundColours[i];
 
         // Add data and push to collections array
@@ -62,7 +59,7 @@ var ajaxProcess = $.ajax({
     new Chart(document.getElementById(location), {
         type: 'horizontalBar',
         data: {
-          labels: sLabels,
+          labels: supporterTypesLabels,
           datasets: theData
         },
         options: standardOptions
@@ -70,33 +67,54 @@ var ajaxProcess = $.ajax({
 
   };
 
-  function lineChart(location) {
+  function dataLoop() {
+
+    for (var i = 0; i < signUpDateTypeLabels.length; i++) {
+
+        // Build each bar for the array
+        var item = {};
+        item.label = channelTypesLabels[i];
+        item.backgroundColor = backgroundColours[i];
+
+        // Add data and push to collections array
+        item.data = results[dataType].chartData[i];
+        theData.push(item);
+    };
+
+  };
+
+  function lineChart(dataType,location) {
     // Define the empty array for the chart data
+
+    var theData = [];
+
+    // function dataLoop();
+
     var theData = [{
-      data: [5,7,4,2,50],
-      label: 'All',
+      data: results.signUpDateType.chartData[0],
+      label: 'Cold',
       borderColor: "#444444",
       fill: false
     },
     {
-      data: [2,2,3,0,2],
-      label: 'Email',
+      data: results.signUpDateType.chartData[1],
+      label: 'Warm',
       borderColor: "#3e95cd",
       fill: false
     }];
 
-    var dates = ["01/01/2018","02/01/2018","03/01/2018","04/01/2018","05/01/2018"]
-
     // Chart options
     var standardOptions = {
-      title: { display: false }
+      legend: { display: true },
+      title: { display: false },
+      scales: { xAxes: [{ stacked: false }], yAxes: [{ stacked: false }] }
     };
 
     // Build the chart
     new Chart(document.getElementById(location), {
         type: 'line',
         data: {
-          labels: dates,
+          labels: allDatesLabels,
           datasets: theData
         },
         options: standardOptions
@@ -113,31 +131,31 @@ var ajaxProcess = $.ajax({
 
     tColumnTitles += "<th></th>" // Empty cell at the beginning
 
-    for ( var i = 0; i < cLabels.length; i++ ) {
-      tColumnTitles += "<th>" + cLabels[i] + "</th> "
+    for ( var i = 0; i < channelTypesLabels.length; i++ ) {
+      tColumnTitles += "<th>" + channelTypesLabels[i] + "</th> "
     };
 
     // A running totals object for later on
     var runningTotals = {};
-    for ( var i = 0; i < sLabels.length; i++ ) { runningTotals[sLabels[i]] = 0; }
-    for ( var i = 0; i < cLabels.length; i++ ) { runningTotals[cLabels[i]] = 0; }
+    for ( var i = 0; i < supporterTypesLabels.length; i++ ) { runningTotals[supporterTypesLabels[i]] = 0; }
+    for ( var i = 0; i < channelTypesLabels.length; i++ ) { runningTotals[channelTypesLabels[i]] = 0; }
 
     // Build each row and add a total for each cell as we go to the running total
     var tRowsCollections = [];
 
-    for ( var i = 0; i < sLabels.length; i++ ) {
+    for ( var i = 0; i < supporterTypesLabels.length; i++ ) {
 
       var tcells = [];
 
       // The row title
-      tcells += ["<th scope='row'>" + sLabels[i] + "</th>"];
+      tcells += ["<th scope='row'>" + supporterTypesLabels[i] + "</th>"];
 
       // Each content cell
-      for ( var x = 0; x < cLabels.length; x++ ) {
-        var theNumber = results[type][sLabels[i]][cLabels[x]];
+      for ( var x = 0; x < channelTypesLabels.length; x++ ) {
+        var theNumber = results[type][supporterTypesLabels[i]][channelTypesLabels[x]];
         tcells += ["<td>" + theNumber + "</td>"];
-        runningTotals[sLabels[i]] += theNumber;
-        runningTotals[cLabels[x]] += theNumber;
+        runningTotals[supporterTypesLabels[i]] += theNumber;
+        runningTotals[channelTypesLabels[x]] += theNumber;
       };
 
       tRowsCollections += ["<tr>" + tcells + "</tr>"];
@@ -149,9 +167,9 @@ var ajaxProcess = $.ajax({
     $(location + " .summary-title").append("<p class='lead'><strong>Total: " + results[type]['Total'] + "</strong></p>");
 
     $(location).append('<div class="col-6 first-col"></div>')
-    for ( var i = 0; i < sLabels.length; i++ ) { dataSummaries(runningTotals[sLabels[i]],sLabels[i],location + " .first-col"); }
+    for ( var i = 0; i < supporterTypesLabels.length; i++ ) { dataSummaries(runningTotals[supporterTypesLabels[i]],supporterTypesLabels[i],location + " .first-col"); }
     $(location).append('<div class="col-6 second-col"></div>')
-    for ( var i = 0; i < cLabels.length; i++ ) { dataSummaries(runningTotals[cLabels[i]],cLabels[i],location + " .second-col"); }
+    for ( var i = 0; i < channelTypesLabels.length; i++ ) { dataSummaries(runningTotals[channelTypesLabels[i]],channelTypesLabels[i],location + " .second-col"); }
 
   };
 
@@ -162,6 +180,8 @@ var ajaxProcess = $.ajax({
 
   theChart('Collectors','chart2');
   tables('Collectors', '#table2');
+
+  lineChart('signUpDateType','chart3');
 
   pageTitles();
 
