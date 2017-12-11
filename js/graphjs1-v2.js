@@ -67,18 +67,19 @@ var ajaxProcess = $.ajax({
 
   };
 
-  function dataLoop() {
+  function dataLoop(dataType,array) {
 
-    for (var i = 0; i < signUpDateTypeLabels.length; i++) {
+    for (var i = 0; i < supporterTypesLabels.length; i++) {
 
         // Build each bar for the array
         var item = {};
-        item.label = channelTypesLabels[i];
-        item.backgroundColor = backgroundColours[i];
+        item.label = supporterTypesLabels[i];
+        item.borderColor = backgroundColours[i];
+        item.fill = false;
 
         // Add data and push to collections array
         item.data = results[dataType].chartData[i];
-        theData.push(item);
+        array.push(item);
     };
 
   };
@@ -88,20 +89,8 @@ var ajaxProcess = $.ajax({
 
     var theData = [];
 
-    // function dataLoop();
+    dataLoop(dataType,theData);
 
-    var theData = [{
-      data: results.signUpDateType.chartData[0],
-      label: 'Cold',
-      borderColor: "#444444",
-      fill: false
-    },
-    {
-      data: results.signUpDateType.chartData[1],
-      label: 'Warm',
-      borderColor: "#3e95cd",
-      fill: false
-    }];
 
     // Chart options
     var standardOptions = {
