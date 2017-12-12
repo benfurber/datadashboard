@@ -31,6 +31,26 @@ var ajaxProcess = $.ajax({
 
   // Charts functions
 
+  // For each chart data
+  function dataLoop(level1,level2,level3,theData,chartType) {
+
+    for (var i = 0; i < level3.length; i++) {
+
+        // Build each bar for the array
+        var item = {};
+        item.label = level3[i];
+        if (chartType == 'line') { item.borderColor = backgroundColours[i]; }
+        else { item.backgroundColor = backgroundColours[i]; }
+
+        item.fill = false;
+
+        // Add data and push to collections array
+        item.data = results[level1].chartData[i];
+        theData.push(item);
+    };
+
+  };
+
   function theChart(dataType,location) {
     // Define the empty array for the chart data
     var theData = [];
@@ -67,30 +87,15 @@ var ajaxProcess = $.ajax({
 
   };
 
-  function dataLoop(dataType,array) {
-
-    for (var i = 0; i < supporterTypesLabels.length; i++) {
-
-        // Build each bar for the array
-        var item = {};
-        item.label = supporterTypesLabels[i];
-        item.borderColor = backgroundColours[i];
-        item.fill = false;
-
-        // Add data and push to collections array
-        item.data = results[dataType].chartData[i];
-        array.push(item);
-    };
-
-  };
-
-  function lineChart(dataType,location) {
+  function lineChart(level1,level2,level3,location) {
     // Define the empty array for the chart data
+
+    level2 = eval(level2);
+    level3 = eval(level3);
 
     var theData = [];
 
-    dataLoop(dataType,theData);
-
+    dataLoop(level1,level2,level3,theData,'line');
 
     // Chart options
     var standardOptions = {
@@ -170,7 +175,7 @@ var ajaxProcess = $.ajax({
   theChart('Collectors','chart2');
   tables('Collectors', '#table2');
 
-  lineChart('signUpDateType','chart3');
+  lineChart('signUpDateType','allDatesLabels','supporterTypesLabels','chart3');
 
   pageTitles();
 
