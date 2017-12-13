@@ -34,21 +34,44 @@ var ajaxProcess = $.ajax({
   // For each chart data
   function dataLoop(level1,level2,level3,theData,chartType) {
 
-    for (var i = 0; i < level3.length; i++) {
+    if (chartType == 'doughnut') { var length = level2.length }
+    else { var length = level3.length }
 
-        // Build each bar for the array
-        var item = {};
-        item.label = level3[i];
-        if (chartType == 'line') { item.borderColor = backgroundColours[i]; }
-        else { item.backgroundColor = backgroundColours[i]; }
+    if (chartType == 'doughnut') {
+      var item = {
+        backgroundColor: [],
+        data: []
+      };
+      for (var i = 0; i < length; i++) {
+        var subTotal = 0;
+        for (var x = 0; x < level3.length; x++) {
+          subTotal += results[level1][level2[i]][level3[x]];
+        }
+        item['backgroundColor'].push(backgroundColours[i]);
+        item['data'].push(subTotal);
+      }
+      theData.push(item);
+    }
+    else {
+      for (var i = 0; i < length; i++) {
 
-        item.fill = false;
+          // Build each item for the array
+          var item = {
+            backgroundColor: [],
+            data: []
+          };
+          item.label = level3[i];
 
-        // Add data and push to collections array
-        item.data = results[level1].chartData[i];
-        theData.push(item);
+          if (chartType == 'line') { item.borderColor = backgroundColours[i]; }
+          else { item.backgroundColor = backgroundColours[i]; }
+
+          item.fill = false;
+
+          // Add data and push to collections array
+          item.data = results[level1].chartData[i];
+          theData.push(item);
+      };
     };
-
   };
 
   function theChart(chartType,level1,level2,level3,location) {
@@ -61,14 +84,12 @@ var ajaxProcess = $.ajax({
     dataLoop(level1,level2,level3,theData,chartType);
 
     // Chart options
-    if (chartType == 'horizontalBar') { var stackStatement = true }
-    else { var stackStatement = false };
-
-    var standardOptions = {
-      legend: { display: true },
-      title: { display: false },
-      scales: { xAxes: [{ stacked: stackStatement }], yAxes: [{ stacked: stackStatement }] }
-    };
+    if (chartType == 'horizontalBar') {
+      var standardOptions = {
+        title: { display: false },
+        scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] }
+      };
+    } else { var standardOptions = { title: { display: false } }; }
 
     // Build the chart
     new Chart(document.getElementById(location), {
@@ -142,17 +163,20 @@ var ajaxProcess = $.ajax({
 
   // Calling the functions (The view?)
 
-  theChart('horizontalBar','Collections','supporterTypesLabels','channelTypesLabels','chart1');
-  tables('Collections','supporterTypesLabels','channelTypesLabels','#table1');
+  theChart('horizontalBar','Collections','supporterTypesLabels','channelTypesLabels','chart11');
+  tables('Collections','supporterTypesLabels','channelTypesLabels','#table11');
 
-  theChart('horizontalBar','Collectors','supporterTypesLabels','channelTypesLabels','chart2');
-  tables('Collectors','supporterTypesLabels','channelTypesLabels','#table2');
+  theChart('horizontalBar','Collectors','supporterTypesLabels','channelTypesLabels','chart12');
+  tables('Collectors','supporterTypesLabels','channelTypesLabels','#table12');
 
-  theChart('line','signUpDateType','allDatesLabels','supporterTypesLabels','chart3');
-  tables('signUpDateType','allDatesLabels','supporterTypesLabels','#table3',false);
+  theChart('doughnut','Collectors','supporterTypesLabels','channelTypesLabels','chart13');
+  theChart('doughnut','Collectors','supporterTypesLabels','channelTypesLabels','chart13');
 
-  theChart('line','signUpDateChannel','allDatesLabels','channelTypesLabels','chart4');
-  tables('signUpDateChannel','allDatesLabels','channelTypesLabels','#table4',false);
+  theChart('line','signUpDateType','allDatesLabels','supporterTypesLabels','chart21');
+  tables('signUpDateType','allDatesLabels','supporterTypesLabels','#table21',false);
+
+  theChart('line','signUpDateChannel','allDatesLabels','channelTypesLabels','chart22');
+  tables('signUpDateChannel','allDatesLabels','channelTypesLabels','#table22',false);
 
 
   pageTitles();
