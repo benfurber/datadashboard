@@ -51,64 +51,30 @@ var ajaxProcess = $.ajax({
 
   };
 
-  function theChart(dataType,location) {
+  function theChart(chartType,level1,level2,level3,location) {
     // Define the empty array for the chart data
+
     var theData = [];
-
-    // Build the contents of the data array
-    for (var i = 0, len = channelTypesLabels.length; i < len; i++) {
-
-        // Build each bar for the array
-        var item = {};
-        item.label = channelTypesLabels[i];
-        item.backgroundColor = backgroundColours[i];
-
-        // Add data and push to collections array
-        item.data = results[dataType].chartData[i];
-        theData.push(item);
-    };
-
-    // Chart options
-    var standardOptions = {
-      legend: { display: true },
-      title: { display: false },
-      scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] }
-    };
-
-    // Build the chart
-    new Chart(document.getElementById(location), {
-        type: 'horizontalBar',
-        data: {
-          labels: supporterTypesLabels,
-          datasets: theData
-        },
-        options: standardOptions
-    });
-
-  };
-
-  function lineChart(level1,level2,level3,location) {
-    // Define the empty array for the chart data
-
     level2 = eval(level2);
     level3 = eval(level3);
 
-    var theData = [];
-
-    dataLoop(level1,level2,level3,theData,'line');
+    dataLoop(level1,level2,level3,theData,chartType);
 
     // Chart options
+    if (chartType == 'horizontalBar') { var stackStatement = true }
+    else { var stackStatement = false };
+
     var standardOptions = {
       legend: { display: true },
       title: { display: false },
-      scales: { xAxes: [{ stacked: false }], yAxes: [{ stacked: false }] }
+      scales: { xAxes: [{ stacked: stackStatement }], yAxes: [{ stacked: stackStatement }] }
     };
 
     // Build the chart
     new Chart(document.getElementById(location), {
-        type: 'line',
+        type: chartType,
         data: {
-          labels: allDatesLabels,
+          labels: level2,
           datasets: theData
         },
         options: standardOptions
@@ -118,7 +84,7 @@ var ajaxProcess = $.ajax({
 
   // Tables function
 
-  function tables(type,location) {
+  function tables(level1,location) {
 
     // Build the title row
     var tColumnTitles = "";
@@ -146,7 +112,7 @@ var ajaxProcess = $.ajax({
 
       // Each content cell
       for ( var x = 0; x < channelTypesLabels.length; x++ ) {
-        var theNumber = results[type][supporterTypesLabels[i]][channelTypesLabels[x]];
+        var theNumber = results[level1][supporterTypesLabels[i]][channelTypesLabels[x]];
         tcells += ["<td>" + theNumber + "</td>"];
         runningTotals[supporterTypesLabels[i]] += theNumber;
         runningTotals[channelTypesLabels[x]] += theNumber;
@@ -158,7 +124,7 @@ var ajaxProcess = $.ajax({
 
     $(location + " table").append("<thead><tr>" + tColumnTitles + "</tr></thead><tbody>" + tRowsCollections + "</tbody>");
     $(location).append('<div class="col-12 summary-title"></div>');
-    $(location + " .summary-title").append("<p class='lead'><strong>Total: " + results[type]['Total'] + "</strong></p>");
+    $(location + " .summary-title").append("<p class='lead'><strong>Total: " + results[level1]['Total'] + "</strong></p>");
 
     $(location).append('<div class="col-6 first-col"></div>')
     for ( var i = 0; i < supporterTypesLabels.length; i++ ) { dataSummaries(runningTotals[supporterTypesLabels[i]],supporterTypesLabels[i],location + " .first-col"); }
@@ -169,16 +135,16 @@ var ajaxProcess = $.ajax({
 
   // Calling the functions (The view?)
 
-  theChart('Collections','chart1');
-  tables('Collections', '#table1');
+  theChart('horizontalBar','Collections','supporterTypesLabels','channelTypesLabels','chart1');
+  tables('Collections','#table1');
 
-  theChart('Collectors','chart2');
+  theChart('horizontalBar','Collectors','supporterTypesLabels','channelTypesLabels','chart2');
   tables('Collectors', '#table2');
 
-  lineChart('signUpDateType','allDatesLabels','supporterTypesLabels','chart3');
+  theChart('line','signUpDateType','allDatesLabels','supporterTypesLabels','chart3');
+
 
   pageTitles();
 
-  lineChart('chart3');
 
 });
