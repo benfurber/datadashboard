@@ -84,7 +84,7 @@ var ajaxProcess = $.ajax({
 
   // Tables function
 
-  function tables(level1,level2,level3,location) {
+  function tables(level1,level2,level3,location,displayTable=true,displayTotals=true) {
 
     level2 = eval(level2);
     level3 = eval(level3);
@@ -125,14 +125,18 @@ var ajaxProcess = $.ajax({
 
     };
 
-    $(location + " table").append("<thead><tr>" + tColumnTitles + "</tr></thead><tbody>" + tRowsCollections + "</tbody>");
-    $(location).append('<div class="col-12 summary-title"></div>');
-    $(location + " .summary-title").append("<p class='lead'><strong>Total: " + results[level1]['Total'] + "</strong></p>");
+    if (displayTable == true) {
+      $(location + " table").append("<thead><tr>" + tColumnTitles + "</tr></thead><tbody>" + tRowsCollections + "</tbody>");
+      $(location).append('<div class="col-12 summary-title"></div>');
+      $(location + " .summary-title").append("<p class='lead'><strong>Total: " + results[level1]['Total'] + "</strong></p>");
+    };
 
-    $(location).append('<div class="col-6 first-col"></div>')
-    for ( var i = 0; i < level2.length; i++ ) { dataSummaries(runningTotals[level2[i]],level2[i],location + " .first-col"); }
-    $(location).append('<div class="col-6 second-col"></div>')
-    for ( var i = 0; i < level3.length; i++ ) { dataSummaries(runningTotals[level3[i]],level3[i],location + " .second-col"); }
+    if (displayTotals == true) {
+      $(location).append('<div class="col-6 first-col"></div>')
+      for ( var i = 0; i < level2.length; i++ ) { dataSummaries(runningTotals[level2[i]],level2[i],location + " .first-col"); }
+      $(location).append('<div class="col-6 second-col"></div>')
+      for ( var i = 0; i < level3.length; i++ ) { dataSummaries(runningTotals[level3[i]],level3[i],location + " .second-col"); }
+    };
 
   };
 
@@ -145,7 +149,10 @@ var ajaxProcess = $.ajax({
   tables('Collectors','supporterTypesLabels','channelTypesLabels','#table2');
 
   theChart('line','signUpDateType','allDatesLabels','supporterTypesLabels','chart3');
-  // tables('signUpDateType','allDatesLabels','supporterTypesLabels','#table3');
+  tables('signUpDateType','allDatesLabels','supporterTypesLabels','#table3',false);
+
+  theChart('line','signUpDateChannel','allDatesLabels','channelTypesLabels','chart4');
+  tables('signUpDateChannel','allDatesLabels','channelTypesLabels','#table4',false);
 
 
   pageTitles();
