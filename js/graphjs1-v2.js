@@ -84,38 +84,41 @@ var ajaxProcess = $.ajax({
 
   // Tables function
 
-  function tables(level1,location) {
+  function tables(level1,level2,level3,location) {
+
+    level2 = eval(level2);
+    level3 = eval(level3);
 
     // Build the title row
     var tColumnTitles = "";
 
     tColumnTitles += "<th></th>" // Empty cell at the beginning
 
-    for ( var i = 0; i < channelTypesLabels.length; i++ ) {
-      tColumnTitles += "<th>" + channelTypesLabels[i] + "</th> "
+    for ( var i = 0; i < level3.length; i++ ) {
+      tColumnTitles += "<th>" + level3[i] + "</th> "
     };
 
     // A running totals object for later on
     var runningTotals = {};
-    for ( var i = 0; i < supporterTypesLabels.length; i++ ) { runningTotals[supporterTypesLabels[i]] = 0; }
-    for ( var i = 0; i < channelTypesLabels.length; i++ ) { runningTotals[channelTypesLabels[i]] = 0; }
+    for ( var i = 0; i < level2.length; i++ ) { runningTotals[level2[i]] = 0; }
+    for ( var i = 0; i < level3.length; i++ ) { runningTotals[level3[i]] = 0; }
 
     // Build each row and add a total for each cell as we go to the running total
     var tRowsCollections = [];
 
-    for ( var i = 0; i < supporterTypesLabels.length; i++ ) {
+    for ( var i = 0; i < level2.length; i++ ) {
 
       var tcells = [];
 
       // The row title
-      tcells += ["<th scope='row'>" + supporterTypesLabels[i] + "</th>"];
+      tcells += ["<th scope='row'>" + level2[i] + "</th>"];
 
       // Each content cell
-      for ( var x = 0; x < channelTypesLabels.length; x++ ) {
-        var theNumber = results[level1][supporterTypesLabels[i]][channelTypesLabels[x]];
+      for ( var x = 0; x < level3.length; x++ ) {
+        var theNumber = results[level1][level2[i]][level3[x]];
         tcells += ["<td>" + theNumber + "</td>"];
-        runningTotals[supporterTypesLabels[i]] += theNumber;
-        runningTotals[channelTypesLabels[x]] += theNumber;
+        runningTotals[level2[i]] += theNumber;
+        runningTotals[level3[x]] += theNumber;
       };
 
       tRowsCollections += ["<tr>" + tcells + "</tr>"];
@@ -127,21 +130,22 @@ var ajaxProcess = $.ajax({
     $(location + " .summary-title").append("<p class='lead'><strong>Total: " + results[level1]['Total'] + "</strong></p>");
 
     $(location).append('<div class="col-6 first-col"></div>')
-    for ( var i = 0; i < supporterTypesLabels.length; i++ ) { dataSummaries(runningTotals[supporterTypesLabels[i]],supporterTypesLabels[i],location + " .first-col"); }
+    for ( var i = 0; i < level2.length; i++ ) { dataSummaries(runningTotals[level2[i]],level2[i],location + " .first-col"); }
     $(location).append('<div class="col-6 second-col"></div>')
-    for ( var i = 0; i < channelTypesLabels.length; i++ ) { dataSummaries(runningTotals[channelTypesLabels[i]],channelTypesLabels[i],location + " .second-col"); }
+    for ( var i = 0; i < level3.length; i++ ) { dataSummaries(runningTotals[level3[i]],level3[i],location + " .second-col"); }
 
   };
 
   // Calling the functions (The view?)
 
   theChart('horizontalBar','Collections','supporterTypesLabels','channelTypesLabels','chart1');
-  tables('Collections','#table1');
+  tables('Collections','supporterTypesLabels','channelTypesLabels','#table1');
 
   theChart('horizontalBar','Collectors','supporterTypesLabels','channelTypesLabels','chart2');
-  tables('Collectors', '#table2');
+  tables('Collectors','supporterTypesLabels','channelTypesLabels','#table2');
 
   theChart('line','signUpDateType','allDatesLabels','supporterTypesLabels','chart3');
+  // tables('signUpDateType','allDatesLabels','supporterTypesLabels','#table3');
 
 
   pageTitles();
