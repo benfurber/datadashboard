@@ -1,0 +1,147 @@
+[
+	{
+		"id": "1",
+		"supporterType": "Loyal",
+		"theChannel": "Search"
+	},
+	{
+		"id": "2",
+		"supporterType": "Loyal",
+		"theChannel": "Social"
+	},
+	{
+		"id": "3",
+		"supporterType": "Cold",
+		"theChannel": "PPC"
+	},
+	{
+		"id": "4",
+		"supporterType": "Cold",
+		"theChannel": "Search"
+	},
+	{
+		"id": "4",
+		"supporterType": "Cold",
+		"theChannel": "Search"
+	},
+	{
+		"id": "5",
+		"supporterType": "Warm",
+		"theChannel": "Search"
+	},
+	{
+		"id": "6",
+		"supporterType": "Warm",
+		"theChannel": "Email"
+	},
+	{
+		"id": "7",
+		"supporterType": "Warm",
+		"theChannel": "Search"
+	},
+	{
+		"id": "8",
+		"supporterType": "Cold",
+		"theChannel": "PPC"
+	},
+	{
+		"id": "9",
+		"supporterType": "Loyal",
+		"theChannel": "Search"
+	},
+	{
+		"id": "9",
+		"supporterType": "Loyal",
+		"theChannel": "Search"
+	},
+	{
+		"id": "10",
+		"supporterType": "Warm",
+		"theChannel": "Search"
+	},
+	{
+		"id": "11",
+		"supporterType": "Loyal",
+		"theChannel": "Search"
+	},
+	{
+		"id": "12",
+		"supporterType": "Loyal",
+		"theChannel": "Social"
+	},
+	{
+		"id": "13",
+		"supporterType": "Cold",
+		"theChannel": "PPC"
+	},
+	{
+		"id": "14",
+		"supporterType": "Cold",
+		"theChannel": "Search"
+	},
+	{
+		"id": "15",
+		"supporterType": "Cold",
+		"theChannel": "Email"
+	},
+	{
+		"id": "15",
+		"supporterType": "Cold",
+		"theChannel": "Email"
+	},
+	{
+		"id": "15",
+		"supporterType": "Cold",
+		"theChannel": "Email"
+	},
+	{
+		"id": "15",
+		"supporterType": "Cold",
+		"theChannel": "Email"
+	},
+	{
+		"id": "16",
+		"supporterType": "Warm",
+		"theChannel": "Email"
+	},
+	{
+		"id": "17",
+		"supporterType": "Warm",
+		"theChannel": "Search"
+	},
+	{
+		"id": "18",
+		"supporterType": "Cold",
+		"theChannel": "PPC"
+	},
+	{
+		"id": "19",
+		"supporterType": "Loyal",
+		"theChannel": "Search"
+	},
+	{
+		"id": "20",
+		"supporterType": "Loyal",
+		"theChannel": "Search"
+	},
+	{
+		"id": "20",
+		"supporterType": "Loyal",
+		"theChannel": "Search"
+	},
+	{
+		"id": "21",
+		"supporterType": "Loyal",
+		"theChannel": "Offline"
+	},
+	{
+		"id": "22",
+		"supporterType": "Cold",
+		"theChannel": "Search"
+	},
+	{
+		"id": "22",
+		"supporterType": "Cold",
+		"theChannel": "Search"
+	}
+]

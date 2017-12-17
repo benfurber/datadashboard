@@ -151,6 +151,25 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
 
     };
 
+    // Function to simply take the CSV and reformat as a JSON for pivottable.js - objects within an array
+    function simpleObject() {
+
+      var object = [];
+
+      for (var i = 0; i < result.length; i++) {
+
+        var item = {};
+
+        item.id = result[i].regID;
+        item.supporterType = result[i].supporterType;
+        item.theChannel = result[i].theChannel;
+
+        object.push(item);
+      }
+
+      return object;
+
+    }
 
     // Build the object that will be exported
     var forExport = {};
@@ -162,9 +181,13 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
     forExport['signUpDateChannel'] = addObject('signUpDateChannel','allDates','channelTypes',true);
     forExport['labels'] = addLabels();
 
+    var secondExport = {};
+    secondExport = simpleObject();
 
-    // Final command
+
+    // Final commands
     forExport = JSON.stringify(forExport, null, '\t');
+    secondExport = JSON.stringify(secondExport, null, '\t');
 
     // Write the collections JSON to a file
     fs.writeFile("../data/processed/byChannel.json", forExport, (err) => {
@@ -179,4 +202,19 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
       console.log("File written.");
 
     });
+
+    // Write the pivot table JSON to a file
+    fs.writeFile("../data/processed/pivottable.json", secondExport, (err) => {
+
+      // throws an error, you could also catch it here
+      if(err) {
+          console.log("An error has occured while writing of the pivot table JSON file.");
+          console.log(err);
+      };
+
+      // success case, the file was saved
+      console.log("Pivot table file written.");
+
+    });
+
 });

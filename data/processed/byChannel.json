@@ -4,7 +4,7 @@
 			"Email": 4,
 			"Offline": 0,
 			"PPC": 4,
-			"Search": 4,
+			"Search": 5,
 			"Social": 0
 		},
 		"Warm": {
@@ -21,7 +21,7 @@
 			"Search": 7,
 			"Social": 2
 		},
-		"Total": 28,
+		"Total": 29,
 		"chartData": [
 			[
 				4,
@@ -39,7 +39,7 @@
 				0
 			],
 			[
-				4,
+				5,
 				4,
 				7
 			],
