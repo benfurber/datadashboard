@@ -161,8 +161,8 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
         var item = {};
 
         item.id = result[i].regID;
-        item["Support Type"] = result[i].supporterType;
-        item["Channel"] = result[i].theChannel;
+        item["Supporter Type"] = result[i].supporterType;
+        item["Channel Type"] = result[i].theChannel;
         item["Sign-up Date"] = result[i].signupDate;
 
         object.push(item);

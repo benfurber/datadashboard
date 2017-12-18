@@ -105,8 +105,24 @@ var ajaxProcess = $.ajax({
 
   // Tables function
 
-  function tables(level1,level2,level3,location,displayTable=true,displayTotals=true) {
+  function tables(level1,level2,level3,location,displayTable=true,displayTotals=true,displayPivotLink=true) {
 
+    // Naming the parameters required below before the query to variables linking
+    function paraBuilder(variable) {
+      if (variable == 'allDatesLabels') {
+        return 'Sign-up+Date'; // This is basically a cheat, will come back to it later
+      }
+      else {
+        var name = variable.replace('sLabels', '');
+        name = name.replace(/([a-z])([A-Z])/g, '$1+$2');
+        name = name.charAt(0).toUpperCase() + name.slice(1);
+        return name
+      }
+    };
+    var para1 = paraBuilder(level2);
+    var para2 = paraBuilder(level3);
+
+    // Linking the function queries to the right variables
     level2 = eval(level2);
     level3 = eval(level3);
 
@@ -148,11 +164,15 @@ var ajaxProcess = $.ajax({
 
     if (displayTable == true) {
       $(location + " table").append("<thead><tr>" + tColumnTitles + "</tr></thead><tbody>" + tRowsCollections + "</tbody>");
-      $(location).append('<div class="col-12 summary-title"></div>');
-      $(location + " .summary-title").append("<p class='lead'><strong>Total: " + results[level1]['Total'] + "</strong></p>");
+    };
+
+    if (displayPivotLink == true) {
+      $(location + " table").append("<a href='/pivot.html?rows=" + para1 + "&cols=" + para2 + "'><button class='btn btn-info'>Interrogate data</button></a>");
     };
 
     if (displayTotals == true) {
+      $(location).append('<div class="col-12 summary-title"></div>');
+      $(location + " .summary-title").append("<p class='lead'><strong>Total: " + results[level1]['Total'] + "</strong></p>");
       $(location).append('<div class="col-6 first-col"></div>')
       for ( var i = 0; i < level2.length; i++ ) { dataSummaries(runningTotals[level2[i]],level2[i],location + " .first-col"); }
       $(location).append('<div class="col-6 second-col"></div>')
@@ -164,19 +184,19 @@ var ajaxProcess = $.ajax({
   // Calling the functions (The view?)
 
   theChart('horizontalBar','Collections','supporterTypesLabels','channelTypesLabels','chart11');
-  tables('Collections','supporterTypesLabels','channelTypesLabels','#table11');
+  tables('Collections','supporterTypesLabels','channelTypesLabels','#table11',true,false,true);
 
   theChart('horizontalBar','Collectors','supporterTypesLabels','channelTypesLabels','chart12');
-  tables('Collectors','supporterTypesLabels','channelTypesLabels','#table12');
+  tables('Collectors','supporterTypesLabels','channelTypesLabels','#table12',true,false,true);
 
   theChart('doughnut','Collectors','supporterTypesLabels','channelTypesLabels','chart13');
   theChart('doughnut','Collectors','supporterTypesLabels','channelTypesLabels','chart13');
 
   theChart('line','signUpDateType','allDatesLabels','supporterTypesLabels','chart21');
-  tables('signUpDateType','allDatesLabels','supporterTypesLabels','#table21',false);
+  tables('signUpDateType','allDatesLabels','supporterTypesLabels','#table21',false,false,true);
 
   theChart('line','signUpDateChannel','allDatesLabels','channelTypesLabels','chart22');
-  tables('signUpDateChannel','allDatesLabels','channelTypesLabels','#table22',false);
+  tables('signUpDateChannel','allDatesLabels','channelTypesLabels','#table22',false,false,true);
 
 
   pageTitles();

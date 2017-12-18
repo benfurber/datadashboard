@@ -1,176 +1,176 @@
 [
 	{
 		"id": "1",
-		"Support Type": "Loyal",
-		"Channel": "Search",
+		"Supporter Type": "Loyal",
+		"Channel Type": "Search",
 		"Sign-up Date": "01/01/2018"
 	},
 	{
 		"id": "2",
-		"Support Type": "Loyal",
-		"Channel": "Social",
+		"Supporter Type": "Loyal",
+		"Channel Type": "Social",
 		"Sign-up Date": "01/01/2018"
 	},
 	{
 		"id": "3",
-		"Support Type": "Cold",
-		"Channel": "PPC",
+		"Supporter Type": "Cold",
+		"Channel Type": "PPC",
 		"Sign-up Date": "02/01/2018"
 	},
 	{
 		"id": "4",
-		"Support Type": "Cold",
-		"Channel": "Search",
+		"Supporter Type": "Cold",
+		"Channel Type": "Search",
 		"Sign-up Date": "03/01/2018"
 	},
 	{
 		"id": "4",
-		"Support Type": "Cold",
-		"Channel": "Search",
+		"Supporter Type": "Cold",
+		"Channel Type": "Search",
 		"Sign-up Date": "03/01/2018"
 	},
 	{
 		"id": "5",
-		"Support Type": "Warm",
-		"Channel": "Search",
+		"Supporter Type": "Warm",
+		"Channel Type": "Search",
 		"Sign-up Date": "03/01/2018"
 	},
 	{
 		"id": "6",
-		"Support Type": "Warm",
-		"Channel": "Email",
+		"Supporter Type": "Warm",
+		"Channel Type": "Email",
 		"Sign-up Date": "03/01/2018"
 	},
 	{
 		"id": "7",
-		"Support Type": "Warm",
-		"Channel": "Search",
+		"Supporter Type": "Warm",
+		"Channel Type": "Search",
 		"Sign-up Date": "03/01/2018"
 	},
 	{
 		"id": "8",
-		"Support Type": "Cold",
-		"Channel": "PPC",
+		"Supporter Type": "Cold",
+		"Channel Type": "PPC",
 		"Sign-up Date": "03/01/2018"
 	},
 	{
 		"id": "9",
-		"Support Type": "Loyal",
-		"Channel": "Search",
+		"Supporter Type": "Loyal",
+		"Channel Type": "Search",
 		"Sign-up Date": "05/01/2018"
 	},
 	{
 		"id": "9",
-		"Support Type": "Loyal",
-		"Channel": "Search",
+		"Supporter Type": "Loyal",
+		"Channel Type": "Search",
 		"Sign-up Date": "05/01/2018"
 	},
 	{
 		"id": "10",
-		"Support Type": "Warm",
-		"Channel": "Search",
+		"Supporter Type": "Warm",
+		"Channel Type": "Search",
 		"Sign-up Date": "06/01/2018"
 	},
 	{
 		"id": "11",
-		"Support Type": "Loyal",
-		"Channel": "Search",
+		"Supporter Type": "Loyal",
+		"Channel Type": "Search",
 		"Sign-up Date": "07/01/2018"
 	},
 	{
 		"id": "12",
-		"Support Type": "Loyal",
-		"Channel": "Social",
+		"Supporter Type": "Loyal",
+		"Channel Type": "Social",
 		"Sign-up Date": "07/01/2018"
 	},
 	{
 		"id": "13",
-		"Support Type": "Cold",
-		"Channel": "PPC",
+		"Supporter Type": "Cold",
+		"Channel Type": "PPC",
 		"Sign-up Date": "09/01/2018"
 	},
 	{
 		"id": "14",
-		"Support Type": "Cold",
-		"Channel": "Search",
+		"Supporter Type": "Cold",
+		"Channel Type": "Search",
 		"Sign-up Date": "10/01/2018"
 	},
 	{
 		"id": "15",
-		"Support Type": "Cold",
-		"Channel": "Email",
+		"Supporter Type": "Cold",
+		"Channel Type": "Email",
 		"Sign-up Date": "09/01/2018"
 	},
 	{
 		"id": "15",
-		"Support Type": "Cold",
-		"Channel": "Email",
+		"Supporter Type": "Cold",
+		"Channel Type": "Email",
 		"Sign-up Date": "09/01/2018"
 	},
 	{
 		"id": "15",
-		"Support Type": "Cold",
-		"Channel": "Email",
+		"Supporter Type": "Cold",
+		"Channel Type": "Email",
 		"Sign-up Date": "09/01/2018"
 	},
 	{
 		"id": "15",
-		"Support Type": "Cold",
-		"Channel": "Email",
+		"Supporter Type": "Cold",
+		"Channel Type": "Email",
 		"Sign-up Date": "09/01/2018"
 	},
 	{
 		"id": "16",
-		"Support Type": "Warm",
-		"Channel": "Email",
+		"Supporter Type": "Warm",
+		"Channel Type": "Email",
 		"Sign-up Date": "09/01/2018"
 	},
 	{
 		"id": "17",
-		"Support Type": "Warm",
-		"Channel": "Search",
+		"Supporter Type": "Warm",
+		"Channel Type": "Search",
 		"Sign-up Date": "10/01/2018"
 	},
 	{
 		"id": "18",
-		"Support Type": "Cold",
-		"Channel": "PPC",
+		"Supporter Type": "Cold",
+		"Channel Type": "PPC",
 		"Sign-up Date": "12/01/2018"
 	},
 	{
 		"id": "19",
-		"Support Type": "Loyal",
-		"Channel": "Search",
+		"Supporter Type": "Loyal",
+		"Channel Type": "Search",
 		"Sign-up Date": "12/01/2018"
 	},
 	{
 		"id": "20",
-		"Support Type": "Loyal",
-		"Channel": "Search",
+		"Supporter Type": "Loyal",
+		"Channel Type": "Search",
 		"Sign-up Date": "12/01/2018"
 	},
 	{
 		"id": "20",
-		"Support Type": "Loyal",
-		"Channel": "Search",
+		"Supporter Type": "Loyal",
+		"Channel Type": "Search",
 		"Sign-up Date": "12/01/2018"
 	},
 	{
 		"id": "21",
-		"Support Type": "Loyal",
-		"Channel": "Offline",
+		"Supporter Type": "Loyal",
+		"Channel Type": "Offline",
 		"Sign-up Date": "13/01/2018"
 	},
 	{
 		"id": "22",
-		"Support Type": "Cold",
-		"Channel": "Search",
+		"Supporter Type": "Cold",
+		"Channel Type": "Search",
 		"Sign-up Date": "14/01/2018"
 	},
 	{
 		"id": "22",
-		"Support Type": "Cold",
-		"Channel": "Search",
+		"Supporter Type": "Cold",
+		"Channel Type": "Search",
 		"Sign-up Date": "14/01/2018"
 	}
 ]
