@@ -161,8 +161,9 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
         var item = {};
 
         item.id = result[i].regID;
-        item.supporterType = result[i].supporterType;
-        item.theChannel = result[i].theChannel;
+        item["Support Type"] = result[i].supporterType;
+        item["Channel"] = result[i].theChannel;
+        item["Sign-up Date"] = result[i].signupDate;
 
         object.push(item);
       }
@@ -199,7 +200,7 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
       };
 
       // success case, the file was saved
-      console.log("File written.");
+      console.log("By channel summary JSON file written.");
 
     });
 
@@ -213,7 +214,7 @@ converter.fromFile("../data/canvas1-processed.csv",function(err,result){
       };
 
       // success case, the file was saved
-      console.log("Pivot table file written.");
+      console.log("Pivot table JSON file written.");
 
     });
 
