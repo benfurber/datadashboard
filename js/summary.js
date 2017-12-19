@@ -1,3 +1,5 @@
+// V1 with semi-idealised data
+
 var fs = require("fs");
 var moment = require("moment");
 
