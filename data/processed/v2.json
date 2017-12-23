@@ -1,0 +1,240 @@
+[
+	{
+		"regID": "1",
+		"supporterType": "Loyal",
+		"theChannel": "Search",
+		"signupDate": "01/01/2018"
+	},
+	{
+		"regID": "2",
+		"supporterType": "Loyal",
+		"theChannel": "Social",
+		"signupDate": "01/01/2018"
+	},
+	{
+		"regID": "3",
+		"supporterType": "Cold",
+		"theChannel": "PPC",
+		"signupDate": "02/01/2018"
+	},
+	{
+		"regID": "4",
+		"supporterType": "Cold",
+		"theChannel": "Search",
+		"signupDate": "03/01/2018"
+	},
+	{
+		"regID": "4",
+		"supporterType": "Cold",
+		"theChannel": "Search",
+		"signupDate": "03/01/2018"
+	},
+	{
+		"regID": "5",
+		"supporterType": "Warm",
+		"theChannel": "Search",
+		"signupDate": "03/01/2018"
+	},
+	{
+		"regID": "6",
+		"supporterType": "Warm",
+		"theChannel": "Email",
+		"signupDate": "03/01/2018"
+	},
+	{
+		"regID": "7",
+		"supporterType": "Warm",
+		"theChannel": "Search",
+		"signupDate": "03/01/2018"
+	},
+	{
+		"regID": "8",
+		"supporterType": "Cold",
+		"theChannel": "PPC",
+		"signupDate": "03/01/2018"
+	},
+	{
+		"regID": "9",
+		"supporterType": "Loyal",
+		"theChannel": "Search",
+		"signupDate": "05/01/2018"
+	},
+	{
+		"regID": "9",
+		"supporterType": "Loyal",
+		"theChannel": "Search",
+		"signupDate": "05/01/2018"
+	},
+	{
+		"regID": "10",
+		"supporterType": "Warm",
+		"theChannel": "Search",
+		"signupDate": "06/01/2018"
+	},
+	{
+		"regID": "11",
+		"supporterType": "Loyal",
+		"theChannel": "Search",
+		"signupDate": "07/01/2018"
+	},
+	{
+		"regID": "12",
+		"supporterType": "Loyal",
+		"theChannel": "Social",
+		"signupDate": "07/01/2018"
+	},
+	{
+		"regID": "13",
+		"supporterType": "Cold",
+		"theChannel": "PPC",
+		"signupDate": "09/01/2018"
+	},
+	{
+		"regID": "14",
+		"supporterType": "Cold",
+		"theChannel": "Search",
+		"signupDate": "10/01/2018"
+	},
+	{
+		"regID": "15",
+		"supporterType": "Cold",
+		"theChannel": "Email",
+		"signupDate": "09/01/2018"
+	},
+	{
+		"regID": "15",
+		"supporterType": "Cold",
+		"theChannel": "Email",
+		"signupDate": "09/01/2018"
+	},
+	{
+		"regID": "15",
+		"supporterType": "Cold",
+		"theChannel": "Email",
+		"signupDate": "09/01/2018"
+	},
+	{
+		"regID": "15",
+		"supporterType": "Cold",
+		"theChannel": "Email",
+		"signupDate": "09/01/2018"
+	},
+	{
+		"regID": "16",
+		"supporterType": "Warm",
+		"theChannel": "Email",
+		"signupDate": "09/01/2018"
+	},
+	{
+		"regID": "17",
+		"supporterType": "Warm",
+		"theChannel": "Search",
+		"signupDate": "10/01/2018"
+	},
+	{
+		"regID": "18",
+		"supporterType": "Cold",
+		"theChannel": "PPC",
+		"signupDate": "12/01/2018"
+	},
+	{
+		"regID": "19",
+		"supporterType": "Loyal",
+		"theChannel": "Search",
+		"signupDate": "12/01/2018"
+	},
+	{
+		"regID": "20",
+		"supporterType": "Loyal",
+		"theChannel": "Search",
+		"signupDate": "12/01/2018"
+	},
+	{
+		"regID": "20",
+		"supporterType": "Loyal",
+		"theChannel": "Search",
+		"signupDate": "12/01/2018"
+	},
+	{
+		"regID": "21",
+		"supporterType": "Loyal",
+		"theChannel": "Offline",
+		"signupDate": "13/01/2018"
+	},
+	{
+		"regID": "22",
+		"supporterType": "Cold",
+		"theChannel": "Search",
+		"signupDate": "14/01/2018"
+	},
+	{
+		"regID": "22",
+		"supporterType": "Cold",
+		"theChannel": "Search",
+		"signupDate": "14/01/2018"
+	},
+	{
+		"regID": "Source Desc",
+		"supporterType": "Source Id"
+	},
+	{
+		"regID": "Supporter Registration Proxy",
+		"supporterType": "1"
+	},
+	{
+		"regID": "Supporter Registration Self Service",
+		"supporterType": "2"
+	},
+	{
+		"regID": "File loading process",
+		"supporterType": "4"
+	},
+	{
+		"regID": "Recipient Collection Interest ",
+		"supporterType": "3"
+	},
+	{
+		"regID": "Group Booking Proxy",
+		"supporterType": "5"
+	},
+	{
+		"regID": "Third Party Proxy",
+		"supporterType": "6"
+	},
+	{
+		"regID": "Third Party Radio Proxy",
+		"supporterType": "7"
+	},
+	{
+		"regID": "Source Desc",
+		"supporterType": "Source Id"
+	},
+	{
+		"regID": "Supporter Registration Proxy",
+		"supporterType": "1"
+	},
+	{
+		"regID": "Supporter Registration Self Service",
+		"supporterType": "2"
+	},
+	{
+		"regID": "File loading process",
+		"supporterType": "4"
+	},
+	{
+		"regID": "Recipient Collection Interest ",
+		"supporterType": "3"
+	},
+	{
+		"regID": "Group Booking Proxy",
+		"supporterType": "5"
+	},
+	{
+		"regID": "Third Party Proxy",
+		"supporterType": "6"
+	},
+	{
+		"regID": "Third Party Radio Proxy",
+		"supporterType": "7"
+	}
+]
