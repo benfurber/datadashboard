@@ -41,14 +41,11 @@ function secondary2() {
     .fromFile(secondaryItemsList.knownEmailAddresses)
     .on('json',(jsonObj) => {
       if (jsonObj['Email Address'].match(/(@mc.org.uk)/)) {
-        mappingObject['knownEmailAddresses']['emailAddress'] = jsonObj['Email Address'],
-        mappingObject['knownEmailAddresses']['userType'] = 'Staff'
+        mappingObject['knownEmailAddresses'][jsonObj['Email Address']] = 'Staff'
       } else if (jsonObj['Status'] == ('Loyal' || 'Warm' || 'Staff' )) {
-        mappingObject['knownEmailAddresses']['emailAddress'] = jsonObj['Email Address'],
-        mappingObject['knownEmailAddresses']['userType'] = jsonObj['Status']
+        mappingObject['knownEmailAddresses'][jsonObj['Email Address']] = jsonObj['Status']
       } else {
-        mappingObject['knownEmailAddresses']['emailAddress'] = jsonObj['Email Address'],
-        mappingObject['knownEmailAddresses']['userType'] = 'Other'
+        mappingObject['knownEmailAddresses'][jsonObj['Email Address']] = 'Other'
       }
     })
     .on('done',(error)=>{
@@ -72,9 +69,17 @@ Promise.all([secondary1(),secondary2()])
           // User ID moved over. Known as RecipientPrimarykey, Unique ID in other places.
           item['userID'] = jsonObj['RecipientPrimarykey']
 
-          // Mapping the
+          // Mapping the source URL
           let creationSource = jsonObj['Creation Source']
           item['creationSource'] = mappingObject['completionSource'][creationSource]
+
+          // Adding a support type by checking against the knownEmailAddresses object
+          console.log(mappingObject['knownEmailAddresses'].keys)
+          if ( mappingObject.hasOwnProperty(item['Address']) ) {
+            item['supporterType'] = mappingObject['knownEmailAddresses'][item['Address']]
+          } else {
+            item['supporterType'] = 'Cold'
+          }
 
           mainArray.push(item)
 
