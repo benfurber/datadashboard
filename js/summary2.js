@@ -2,11 +2,11 @@
 
 const fs = require("fs");
 const moment = require("moment");
-const stream = require('stream');
+const stream = require("stream");
 
 const csv = require("csvtojson");
 
-const mainData = '../data/neoexports/subscriptions.csv';
+const mainData = "../data/neoexports/subscriptions.csv";
 let mainArray = [];
 
 // Secondary data sources that need blending with the main
@@ -24,7 +24,7 @@ addSecondaryItems('knownEmailAddresses','../data/neoexports/knownemailaddresses.
 
 
 // Add completion sources to the mapping object
-function secondary1() {
+var secondary1 = new Promise(function(resolve, reject) {
   csv()
     .fromFile(secondaryItemsList.completionSource)
     .on('json',(jsonObj)=>{
@@ -32,10 +32,12 @@ function secondary1() {
     })
     .on('done',(error)=>{
       console.log('Completion sources CSV mapped.')
+      resolve()
     })
-}
+});
+
 // Add completion sources to the mapping object
-function secondary2() {
+var secondary2 = new Promise(function (resolve, reject) {
   mappingObject['knownEmailAddresses'] = {}
   csv()
     .fromFile(secondaryItemsList.knownEmailAddresses)
@@ -51,11 +53,12 @@ function secondary2() {
     .on('done',(error)=>{
       console.log('Known email addresses CSV mapped.')
       console.log(mappingObject['knownEmailAddresses'])
+      resolve()
     })
-}
+});
 
-Promise.all([secondary1(),secondary2()])
-  .then(function() {
+Promise.all([secondary1,secondary2])
+  .then(function(results) {
       csv() // {flatKeys:true}
       .fromFile(mainData)
         .on('json',(jsonObj, rowIndex)=>{
@@ -103,4 +106,7 @@ Promise.all([secondary1(),secondary2()])
             });
 
         })
+  })
+  .catch(function(error) {
+    console.log(error)
   })
