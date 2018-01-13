@@ -52,7 +52,6 @@ var secondary2 = new Promise(function (resolve, reject) {
     })
     .on('done',(error)=>{
       console.log('Known email addresses CSV mapped.')
-      console.log(mappingObject['knownEmailAddresses'])
       resolve()
     })
 });
@@ -81,6 +80,7 @@ Promise.all([secondary1,secondary2])
           if ( mappingObject.hasOwnProperty(item['Address']) ) {
             item['supporterType'] = mappingObject['knownEmailAddresses'][item['Address']]
           } else {
+            console.log(item['Address'])
             item['supporterType'] = 'Cold'
           }
 
@@ -89,7 +89,6 @@ Promise.all([secondary1,secondary2])
         })
         .on('done',(error)=>{
             console.log('Finished building main JSON object')
-            console.log(mainArray)
             mainArray = JSON.stringify(mainArray, null, '\t');
 
             fs.writeFile("../data/processed/v2.json", mainArray, (err) => {
@@ -99,6 +98,8 @@ Promise.all([secondary1,secondary2])
                   console.log("An error has occured while writing of the collections JSON file.");
                   console.log(err);
               };
+
+              console.log(mappingObject)
 
               // success case, the file was saved
               console.log('Object written to JSON file.');

@@ -22,6 +22,7 @@
   "dependencies": {
     "async": "^2.6.0",
     "chart.js": "^2.7.1",
+    "csvtojson": "^1.1.9",
     "d3": "*",
     "lodash": "^4.17.4"
   },
